@@ -38,6 +38,8 @@ keymap("n", "<leader>bc", "<cmd>lua require('close_buffers').delete({ type = 'hi
 keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)
 
+keymap("n", "<leader>cf", '<cmd>lua vim.lsp.buf.format({ async = true })<cr>', opts)
+
 -- Telescope
 keymap("n", "<leader>ff", '<cmd>lua require("telescope.builtin").find_files()<cr>', opts)
 keymap("n", "<leader>fg", '<cmd>lua require("telescope.builtin").live_grep()<cr>', opts)
