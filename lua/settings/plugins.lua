@@ -14,6 +14,7 @@ return require('packer').startup(function(use)
     use({ "nvim-lualine/lualine.nvim", requires = { "kyazdani42/nvim-web-devicons", opt = true } })
     use({ "akinsho/nvim-bufferline.lua", requires = "kyazdani42/nvim-web-devicons" })
     use({ "kazhala/close-buffers.nvim" })
+    use({ "lewis6991/gitsigns.nvim" })
 
     -- Treesitter
     use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })

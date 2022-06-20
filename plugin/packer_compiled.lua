@@ -104,6 +104,11 @@ _G.packer_plugins = {
     path = "/Users/tassiano/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
     url = "https://github.com/saadparwaiz1/cmp_luasnip"
   },
+  ["gitsigns.nvim"] = {
+    loaded = true,
+    path = "/Users/tassiano/.local/share/nvim/site/pack/packer/start/gitsigns.nvim",
+    url = "https://github.com/lewis6991/gitsigns.nvim"
+  },
   ["lsp_signature.nvim"] = {
     loaded = true,
     path = "/Users/tassiano/.local/share/nvim/site/pack/packer/start/lsp_signature.nvim",
