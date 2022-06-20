@@ -55,6 +55,3 @@ keymap("n", "<leader>tt", "<cmd>:NvimTreeToggle<cr>", opts)
 keymap("n", "<leader>rn", "<cmd>Lspsaga rename<cr>", opts)
 keymap("n", "<leader>sd", "<cmd>Lspsaga hover_doc<cr>", opts)
 keymap("n", "<leader>ca", "<cmd>Lspsaga code_action<cr>", opts)
-
--- Format
-keymap("n", "<leader>cf", "<cmd>lua vim.lsp.buf.format({ async = true })<cr>", opts)

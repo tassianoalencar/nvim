@@ -2,9 +2,7 @@
 local status_ok, lspsaga = pcall(require, "lspsaga")
 
 if not status_ok then
-	return
+    return
 end
 
-lspsaga.init_lsp_saga({
-    use_saga_diagnostic_sign = true
-})
+lspsaga.init_lsp_saga({})
