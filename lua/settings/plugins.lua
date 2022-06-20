@@ -16,6 +16,7 @@ return require('packer').startup(function(use)
     use({ "kazhala/close-buffers.nvim" })
     use({ "lewis6991/gitsigns.nvim" })
     use({ "glepnir/lspsaga.nvim", branch = "main" })
+    use({ "lukas-reineke/indent-blankline.nvim" })
 
     -- Treesitter
     use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
