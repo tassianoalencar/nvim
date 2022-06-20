@@ -15,7 +15,8 @@ return require("packer").startup(function(use)
 	use({ "akinsho/nvim-bufferline.lua", requires = "kyazdani42/nvim-web-devicons" })
 	use({ "kazhala/close-buffers.nvim" })
 	use({ "lewis6991/gitsigns.nvim" })
-	use({ "glepnir/lspsaga.nvim", branch = "main" })
+    use({ "tami5/lspsaga.nvim" })
+
 	use({ "lukas-reineke/indent-blankline.nvim" })
 	use({ "numToStr/Comment.nvim" })
 

@@ -29,6 +29,7 @@ vim.opt.cmdheight = 1
 vim.opt.completeopt = { "menuone", "noselect" }
 vim.opt.updatetime = 300
 vim.opt.wrap = false
+vim.opt.termguicolors = true
 
 -- Persistent undo
 vim.opt['undofile'] = true
