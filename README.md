@@ -136,7 +136,6 @@ You can install new plugins here: [plugins](https://github.com/LunarVim/nvim-bas
 - [project.nvim](https://github.com/ahmedkhalf/project.nvim)
 - [impatient.nvim](https://github.com/lewis6991/impatient.nvim)
 - [indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim)
-- [alpha-nvim](https://github.com/goolord/alpha-nvim)
 - [tokyonight.nvim](https://github.com/folke/tokyonight.nvim)
 - [darkplus.nvim](https://github.com/LunarVim/darkplus.nvim)
 - [nvim-cmp](https://github.com/hrsh7th/nvim-cmp)
