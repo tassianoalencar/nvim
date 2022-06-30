@@ -72,7 +72,7 @@ local function lsp_keymaps(bufnr)
 end
 
 M.on_attach = function(client, bufnr)
-  client.resolved_capabilities.document_formatting = false
+	client.resolved_capabilities.document_formatting = false
 
 	-- if client.name == "tsserver" then
 	-- 	client.resolved_capabilities.document_formatting = false
