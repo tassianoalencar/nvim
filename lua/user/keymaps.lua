@@ -56,9 +56,14 @@ keymap("v", ">", ">gv", opts)
 keymap("n", "<leader>tt", ":NvimTreeToggle<CR>", opts)
 
 -- Telescope
-keymap("n", "<leader>ff", ":Telescope find_files<CR>", opts)
-keymap("n", "<leader>fg", ":Telescope live_grep<CR>", opts)
-keymap("n", "<leader>fb", ":Telescope buffers<CR>", opts)
+keymap("n", "<leader>ff", '<cmd>lua require("telescope.builtin").find_files()<cr>', opts)
+keymap("n", "<leader>fg", '<cmd>lua require("telescope.builtin").live_grep()<cr>', opts)
+keymap("n", "<leader>fb", '<cmd>lua require("telescope.builtin").buffers()<cr>', opts)
+keymap("n", "<leader>fh", '<cmd>lua require("telescope.builtin").help_tags()<cr>', opts)
+keymap("n", "<leader>fe", '<cmd>lua require("telescope.builtin").diagnostics()<cr>', opts)
+keymap("n", "<leader>fr", '<cmd>lua require("telescope.builtin").lsp_document_symbols()<cr>', opts)
+keymap("n", "<leader>ft", '<cmd>lua require("telescope.builtin").lsp_dynamic_workspace_symbols()<cr>', opts)
+keymap("n", "<leader>fo", '<cmd>lua require("telescope.builtin").oldfiles()<cr>', opts)
 
 -- Comment
 keymap("n", "<leader>/", "<cmd>lua require('Comment.api').toggle_current_linewise()<CR>", opts)
