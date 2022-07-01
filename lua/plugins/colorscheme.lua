@@ -1,9 +1,9 @@
-local present, themer = pcall(require, 'themer')
+local present, themer = pcall(require, "themer")
 
 if not present then
-  return
+	return
 end
 
 themer.setup({
-  colorscheme = "rose_pine",
+	colorscheme = "rose_pine",
 })
