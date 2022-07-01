@@ -1,19 +1,21 @@
-require "user.options"
-require "user.keymaps"
-require "user.plugins"
-require "user.autocommands"
-require "user.colorscheme"
-require "user.cmp"
-require "user.telescope"
-require "user.treesitter"
-require "user.autopairs"
-require "user.comment"
-require "user.gitsigns"
-require "user.nvim-tree"
-require "user.bufferline"
-require "user.lualine"
-require "user.toggleterm"
-require "user.impatient"
-require "user.illuminate"
-require "user.indentline"
-require "user.lsp"
+require('core.options')
+require('core.keymaps')
+
+-- Plugins
+require('plugins.packer')
+require('plugins.autocommands')
+require('plugins.colorscheme')
+require('plugins.cmp')
+require('plugins.telescope')
+require('plugins.treesitter')
+require('plugins.autopairs')
+require('plugins.comment')
+require('plugins.gitsigns')
+require('plugins.nvim-tree')
+require('plugins.bufferline')
+require('plugins.lualine')
+require('plugins.toggleterm')
+require('plugins.impatient')
+require('plugins.illuminate')
+require('plugins.indentline')
+require('plugins.lsp')
