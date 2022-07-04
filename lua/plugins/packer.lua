@@ -43,7 +43,6 @@ return packer.startup(function(use)
 	-- My plugins here
 	use({ "wbthomason/packer.nvim" })
 	use({ "nvim-lua/plenary.nvim" })
-	use({ "nvim-lua/popup.nvim" })
 	use({ "windwp/nvim-autopairs" })
 	use({ "numToStr/Comment.nvim" })
 	use({ "JoosepAlviste/nvim-ts-context-commentstring" })
