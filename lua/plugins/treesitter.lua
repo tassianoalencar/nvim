@@ -4,14 +4,12 @@ if not status_ok then
 end
 
 configs.setup({
-	ensure_installed = "all",
-	ignore_install = { "" },
+	ensure_installed = { "lua", "vim", "html", "php", "phpdoc", "scss", "javascript", "jsdoc", "json" },
 	highlight = {
 		enable = true,
-		disable = { "css" },
 	},
 	autopairs = {
 		enable = true,
 	},
-	indent = { enable = true, disable = { "python", "css" } },
+	indent = { enable = true },
 })

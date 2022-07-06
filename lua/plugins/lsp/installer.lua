@@ -8,6 +8,7 @@ local servers = {
 	"html",
 	"tsserver",
 	"intelephense",
+	"cssls",
 }
 
 lsp_installer.setup({
