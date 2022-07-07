@@ -5,12 +5,20 @@ if not status_cmp_ok then
 	return
 end
 
+local config = require("core.config")
+local keymaps = require("core.keymaps")
+
 M.capabilities = vim.lsp.protocol.make_client_capabilities()
 M.capabilities.textDocument.completion.completionItem.snippetSupport = true
 M.capabilities = cmp_nvim_lsp.update_capabilities(M.capabilities)
 
 M.setup = function()
-	local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+	local signs = {
+		Error = config.icons.error,
+		Warn = config.icons.warn,
+		Hint = config.icons.hint,
+		Info = config.icons.info,
+	}
 
 	for type, icon in pairs(signs) do
 		local hl = "DiagnosticSign" .. type
@@ -18,16 +26,16 @@ M.setup = function()
 	end
 
 	vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-		border = "rounded",
+		border = config.border,
 	})
 
 	vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-		border = "rounded",
+		border = config.border,
 	})
 
 	vim.diagnostic.config({
 		virtual_text = {
-			prefix = "●",
+			prefix = config.icons.prefix,
 		},
 	})
 end
@@ -55,7 +63,7 @@ M.on_attach = function(client, bufnr)
 		})
 	end
 
-	require("core.keymaps").lsp(bufnr)
+	keymaps.lsp(bufnr)
 end
 
 return M
