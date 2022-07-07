@@ -1,5 +1,5 @@
 require("core.options")
-require("core.keymaps")
+require("core.keymaps").init()
 
 -- Plugins
 require("plugins.packer")

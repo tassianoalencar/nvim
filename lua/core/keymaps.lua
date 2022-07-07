@@ -1,81 +1,88 @@
--- Shorten function name
-local keymap = vim.keymap.set
--- Silent keymap option
-local opts = { silent = true }
+local M = {}
 
---Remap space as leader key
-keymap("", "<Space>", "<Nop>", opts)
-vim.g.mapleader = " "
+M.keymap = vim.keymap.set
+M.opts = { silent = true }
 
--- Modes
---   normal_mode = "n",
---   insert_mode = "i",
---   visual_mode = "v",
---   visual_block_mode = "x",
---   term_mode = "t",
---   command_mode = "c",
+function M.init()
+	--Remap space as leader key
+	M.keymap("", "<Space>", "<Nop>", M.opts)
+	vim.g.mapleader = " "
 
--- Normal --
--- Better window navigation
-keymap("n", "<C-h>", "<C-w>h", opts)
-keymap("n", "<C-j>", "<C-w>j", opts)
-keymap("n", "<C-k>", "<C-w>k", opts)
-keymap("n", "<C-l>", "<C-w>l", opts)
+	-- Better window navigation
+	M.keymap("n", "<C-h>", "<C-w>h", M.opts)
+	M.keymap("n", "<C-j>", "<C-w>j", M.opts)
+	M.keymap("n", "<C-k>", "<C-w>k", M.opts)
+	M.keymap("n", "<C-l>", "<C-w>l", M.opts)
 
--- Resize with arrows
-keymap("n", "<S-Up>", ":resize -2<CR>", opts)
-keymap("n", "<S-Down>", ":resize +2<CR>", opts)
-keymap("n", "<S-Left>", ":vertical resize -2<CR>", opts)
-keymap("n", "<S-Right>", ":vertical resize +2<CR>", opts)
+	-- Resize with arrows
+	M.keymap("n", "<S-Up>", ":resize -2<CR>", M.opts)
+	M.keymap("n", "<S-Down>", ":resize +2<CR>", M.opts)
+	M.keymap("n", "<S-Left>", ":vertical resize -2<CR>", M.opts)
+	M.keymap("n", "<S-Right>", ":vertical resize +2<CR>", M.opts)
 
--- Navigate buffers
-keymap("n", "<S-l>", ":bnext<CR>", opts)
-keymap("n", "<S-h>", ":bprevious<CR>", opts)
+	-- Navigate buffers
+	M.keymap("n", "<S-l>", ":bnext<CR>", M.opts)
+	M.keymap("n", "<S-h>", ":bprevious<CR>", M.opts)
 
--- Clear highlights
-keymap("n", "<leader>h", "<cmd>nohlsearch<CR>", opts)
+	-- Clear highlights
+	M.keymap("n", "<leader>h", "<cmd>nohlsearch<CR>", M.opts)
 
--- Close buffers
-keymap("n", "<S-q>", "<cmd>Bdelete!<CR>", opts)
+	-- Close buffers
+	M.keymap("n", "<S-q>", "<cmd>Bdelete!<CR>", M.opts)
 
--- Better paste
-keymap("v", "p", '"_dP', opts)
+	-- Better paste
+	M.keymap("v", "p", '"_dP', M.opts)
 
--- Insert --
--- Press jk fast to enter
-keymap("i", "jk", "<ESC>", opts)
+	-- Press jk fast to enter
+	M.keymap("i", "jk", "<ESC>", M.opts)
 
--- Visual --
--- Stay in indent mode
-keymap("v", "<", "<gv", opts)
-keymap("v", ">", ">gv", opts)
+	-- Stay in indent mode
+	M.keymap("v", "<", "<gv", M.opts)
+	M.keymap("v", ">", ">gv", M.opts)
 
--- Plugins --
+	-- NvimTree
+	M.keymap("n", "<leader>tt", ":NvimTreeToggle<CR>", M.opts)
 
--- NvimTree
-keymap("n", "<leader>tt", ":NvimTreeToggle<CR>", opts)
+	M.telescope()
+	M.comments()
+end
 
--- Telescope
-keymap("n", "<leader>ff", '<cmd>lua require("telescope.builtin").find_files()<cr>', opts)
-keymap("n", "<leader>fg", '<cmd>lua require("telescope.builtin").live_grep()<cr>', opts)
-keymap("n", "<leader>fb", '<cmd>lua require("telescope.builtin").buffers()<cr>', opts)
-keymap("n", "<leader>fh", '<cmd>lua require("telescope.builtin").help_tags()<cr>', opts)
-keymap("n", "<leader>fe", '<cmd>lua require("telescope.builtin").diagnostics()<cr>', opts)
-keymap("n", "<leader>fr", '<cmd>lua require("telescope.builtin").lsp_document_symbols()<cr>', opts)
-keymap("n", "<leader>ft", '<cmd>lua require("telescope.builtin").lsp_dynamic_workspace_symbols()<cr>', opts)
-keymap("n", "<leader>fo", '<cmd>lua require("telescope.builtin").oldfiles()<cr>', opts)
+function M.telescope()
+	M.keymap("n", "<leader>ff", '<cmd>lua require("telescope.builtin").find_files()<cr>', M.opts)
+	M.keymap("n", "<leader>fg", '<cmd>lua require("telescope.builtin").live_grep()<cr>', M.opts)
+	M.keymap("n", "<leader>fb", '<cmd>lua require("telescope.builtin").buffers()<cr>', M.opts)
+	M.keymap("n", "<leader>fh", '<cmd>lua require("telescope.builtin").help_tags()<cr>', M.opts)
+	M.keymap("n", "<leader>fe", '<cmd>lua require("telescope.builtin").diagnostics()<cr>', M.opts)
+	M.keymap("n", "<leader>fr", '<cmd>lua require("telescope.builtin").lsp_document_symbols()<cr>', M.opts)
+	M.keymap("n", "<leader>ft", '<cmd>lua require("telescope.builtin").lsp_dynamic_workspace_symbols()<cr>', M.opts)
+	M.keymap("n", "<leader>fo", '<cmd>lua require("telescope.builtin").oldfiles()<cr>', M.opts)
+end
 
--- Comment
-keymap("n", "<leader>/", "<cmd>lua require('Comment.api').toggle_current_linewise()<CR>", opts)
-keymap("x", "<leader>/", '<ESC><CMD>lua require("Comment.api").toggle_linewise_op(vim.fn.visualmode())<CR>')
+function M.lsp(bufnr)
+	local opts = { noremap = true, silent = true }
+	local keymap = vim.api.nvim_buf_set_keymap
 
--- DAP
-keymap("n", "<leader>db", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", opts)
-keymap("n", "<leader>dc", "<cmd>lua require'dap'.continue()<cr>", opts)
-keymap("n", "<leader>di", "<cmd>lua require'dap'.step_into()<cr>", opts)
-keymap("n", "<leader>do", "<cmd>lua require'dap'.step_over()<cr>", opts)
-keymap("n", "<leader>dO", "<cmd>lua require'dap'.step_out()<cr>", opts)
-keymap("n", "<leader>dr", "<cmd>lua require'dap'.repl.toggle()<cr>", opts)
-keymap("n", "<leader>dl", "<cmd>lua require'dap'.run_last()<cr>", opts)
-keymap("n", "<leader>du", "<cmd>lua require'dapui'.toggle()<cr>", opts)
-keymap("n", "<leader>dt", "<cmd>lua require'dap'.terminate()<cr>", opts)
+	keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", opts)
+	keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
+	keymap(bufnr, "n", "gI", "<cmd>lua vim.lsp.buf.implementation()<cr>", opts)
+	keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>", opts)
+	keymap(bufnr, "n", "gl", "<cmd>lua vim.diagnostic.open_float()<cr>", opts)
+	keymap(bufnr, "n", "<leader>cf", "<cmd>lua vim.lsp.buf.format()<cr>", opts)
+	keymap(bufnr, "n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
+
+	keymap(bufnr, "n", "<leader>li", "<cmd>LspInfo<cr>", opts)
+	keymap(bufnr, "n", "<leader>lI", "<cmd>LspInstallInfo<cr>", opts)
+	keymap(bufnr, "n", "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
+	keymap(bufnr, "n", "<leader>lj", "<cmd>lua vim.diagnostic.goto_next({buffer=0})<cr>", opts)
+	keymap(bufnr, "n", "<leader>lk", "<cmd>lua vim.diagnostic.goto_prev({buffer=0})<cr>", opts)
+	keymap(bufnr, "n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
+	keymap(bufnr, "n", "<leader>ls", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
+	keymap(bufnr, "n", "<leader>lq", "<cmd>lua vim.diagnostic.setloclist()<cr>", opts)
+end
+
+function M.comments()
+	M.keymap("n", "<leader>/", "<cmd>lua require('Comment.api').toggle_current_linewise()<CR>", M.opts)
+	M.keymap("x", "<leader>/", '<ESC><CMD>lua require("Comment.api").toggle_linewise_op(vim.fn.visualmode())<CR>')
+end
+
+return M
