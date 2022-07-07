@@ -4,11 +4,24 @@ if not present then
 end
 
 local actions = require("telescope.actions")
+local config = require("core.config")
 
 telescope.setup({
 	defaults = {
-		prompt_prefix = "  ",
-		selection_caret = "  ",
+		layout_strategy = "horizontal",
+		borderchars = config.borderchars,
+		vimgrep_arguments = {
+			"rg",
+			"--color=never",
+			"--no-heading",
+			"--with-filename",
+			"--line-number",
+			"--column",
+			"--smart-case",
+		},
+		prompt_prefix = " " .. config.icons.arrow_right .. " ",
+		entry_prefix = " " .. config.icons.circle_o .. " ",
+		selection_caret = " " .. config.icons.circle .. " ",
 		path_display = { "smart" },
 		mappings = {
 			i = {

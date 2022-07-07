@@ -7,11 +7,13 @@ local hide_in_width = function()
 	return vim.fn.winwidth(0) > 80
 end
 
+local config = require("core.config")
+
 local diagnostics = {
 	"diagnostics",
 	sources = { "nvim_diagnostic" },
 	sections = { "error", "warn" },
-	symbols = { error = " ", warn = " " },
+	symbols = { error = " " .. config.icons.error .. " ", warn = " " .. config.icons.warn .. " " },
 	colored = false,
 	always_visible = true,
 }
@@ -19,7 +21,7 @@ local diagnostics = {
 local diff = {
 	"diff",
 	colored = false,
-	symbols = { added = "", modified = "", removed = "" }, -- changes diff symbols
+	symbols = { added = config.icons.added, modified = config.icons.modified, removed = config.icons.removed },
 	cond = hide_in_width,
 }
 

@@ -4,6 +4,8 @@ if not present then
 	return
 end
 
+local config = require("core.config")
+
 themer.setup({
-	colorscheme = "rose_pine",
+	colorscheme = config.theme,
 })
