@@ -73,6 +73,7 @@ return packer.startup(function(use)
 	use({ "williamboman/nvim-lsp-installer" })
 	use({ "jose-elias-alvarez/null-ls.nvim" })
 	use({ "ray-x/lsp_signature.nvim" })
+	use({ "simrat39/symbols-outline.nvim" })
 
 	-- Telescope
 	use({ "nvim-telescope/telescope.nvim" })
