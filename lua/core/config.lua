@@ -1,8 +1,8 @@
-local config = {
-	theme = "rose_pine",
-	border = "rounded",
-	borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
-}
+local config = {}
+
+config.theme = "rose_pine"
+config.border = "rounded"
+config.borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
 
 config.icons = {
 	error = "",

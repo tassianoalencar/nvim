@@ -63,37 +63,7 @@ opt.shortmess = opt.shortmess + { c = true }
 
 -- perfomance
 opt.redrawtime = 1500
-opt.timeoutlen = 250
-opt.ttimeoutlen = 10
 opt.updatetime = 100
 
 -- theme
 opt.termguicolors = true
-
---vim.opt.number = true
---vim.opt.relativenumber = true
---vim.opt.cmdheight = 1
---vim.opt.mouse = "a"
---vim.opt.clipboard = "unnamedplus"
---vim.opt.hlsearch = true
---vim.opt.fileencoding = "utf-8"
---vim.opt.ignorecase = true
---vim.opt.smartcase = true
---vim.opt.smartindent = true
---vim.opt.splitbelow = true
---vim.opt.splitright = true
---vim.opt.updatetime = 200
---vim.opt.expandtab = true
---vim.opt.shiftwidth = 4
---vim.opt.tabstop = 4
---vim.opt.cursorline = true
---vim.opt.numberwidth = 2
---vim.opt.signcolumn = "yes"
---vim.opt.wrap = false
---vim.opt.scrolloff = 15
---vim.opt.sidescrolloff = 15
---vim.opt.completeopt = { "menu", "menuone", "noselect" }
---vim.opt.shortmess = vim.opt.shortmess + { c = true }
---vim.opt.backspace = { "eol", "start", "indent" }
---vim.opt.matchpairs = { "(:)", "{:}", "[:]", "<:>" }
---vim.opt.syntax = "enable"

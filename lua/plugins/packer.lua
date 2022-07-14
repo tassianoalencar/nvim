@@ -74,6 +74,7 @@ return packer.startup(function(use)
 	use({ "jose-elias-alvarez/null-ls.nvim" })
 	use({ "ray-x/lsp_signature.nvim" })
 	use({ "simrat39/symbols-outline.nvim" })
+	use({ "glepnir/lspsaga.nvim", branch = "main" })
 
 	-- Telescope
 	use({ "nvim-telescope/telescope.nvim" })

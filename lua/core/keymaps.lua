@@ -67,6 +67,8 @@ function M.lsp(bufnr)
 	keymap(bufnr, "n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
 	keymap(bufnr, "n", "<leader>ne", "<cmd>lua vim.diagnostic.goto_next({buffer=0})<cr>", opts)
 	keymap(bufnr, "n", "<leader>pe", "<cmd>lua vim.diagnostic.goto_prev({buffer=0})<cr>", opts)
+	keymap(bufnr, "n", "<leader>rn", "<cmd>lua require('lspsaga.rename').lsp_rename()<cr>", opts)
+
 	keymap(bufnr, "n", "<C-K>", '<cmd>lua require("lsp_signature").signature()<cr>', opts)
 	keymap(bufnr, "n", "<leader>ts", ":SymbolsOutline<cr>", opts)
 end
