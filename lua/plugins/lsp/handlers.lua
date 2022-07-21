@@ -35,6 +35,7 @@ M.setup = function()
 
 	vim.diagnostic.config({
 		virtual_text = {
+            enabled = false,
 			prefix = config.icons.prefix,
 		},
 	})
