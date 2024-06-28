@@ -16,6 +16,9 @@ return {
         "lua_ls",
         "intelephense",
         "emmet_ls",
+        "tsserver",
+        "html",
+        "tailwindcss"
       }
     }
 
