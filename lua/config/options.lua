@@ -19,3 +19,7 @@ opt.wrap           = false
 opt.backspace      = "indent,eol,start" -- allow backspace on indent, end of line or insert mode start position
 opt.splitright     = true ---------------- split vertical window to the right
 opt.splitbelow     = true ---------------- split horizontal window to the bottom
+opt.pumheight      = 10 ------------------ Max height for pum  
+opt.backup         = false
+opt.writebackup    = false
+opt.swapfile       = false

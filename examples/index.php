@@ -1,9 +1,10 @@
 <?php
 
+namespace Application;
+
 class HelloWorld
 {
-  public function mago(): int
-  {
-    return "teste";
-  }
+
+
+
 }

@@ -7,10 +7,11 @@ return {
     { "folke/neodev.nvim",                   opts = {} },
   },
   config = function()
+    local signs = { Error = " ×", Warn = " ×", Hint = " ×", Info = " ×" }
     local lspconfig = require("lspconfig")
     local mason_lspconfig = require("mason-lspconfig")
-    local cmp_nvim_lsp = require("cmp_nvim_lsp")
     local keymap = vim.keymap
+    local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
     vim.api.nvim_create_autocmd("LspAttach", {
       group = vim.api.nvim_create_augroup("UserLspConfig", {}),
@@ -59,20 +60,18 @@ return {
       end
     })
 
-    local signs = { Error = " ×", Warn = " ×", Hint = " ×", Info = " ×" }
-
     for type, icon in pairs(signs) do
       local hl = "DiagnosticSign" .. type
-      vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+      vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "-" })
     end
 
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities.textDocument.completion.completionItem.snippetSupport = true
+    capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
 
     mason_lspconfig.setup_handlers({
       function(server_name)
-        lspconfig[server_name].setup({ capabilities = capabilities,
-        })
+        lspconfig[server_name].setup({ capabilities = capabilities })
       end
     });
   end
