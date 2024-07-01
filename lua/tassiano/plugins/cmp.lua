@@ -14,20 +14,24 @@ return {
     local cmp = require("cmp")
     local luasnip = require('luasnip')
 
+    -- Define HL Groups
     cmp.setup({
       experimental = {
         native_menu = false,
-        ghost_text = { enabled = true, hl_group = "" }
+        ghost_text = { enabled = true, hl_group = 'MagoGhostText' },
       },
-      ghost_text = { enabled = true },
       snippet = {
         expand = function(args)
           luasnip.lsp_expand(args.body)
         end,
       },
       window = {
-        completion = cmp.config.window.bordered(),
-        documentation = cmp.config.window.bordered()
+        completion = cmp.config.window.bordered({
+          border = 'double'
+        }),
+        documentation = cmp.config.window.bordered({
+          border = 'double'
+        })
       },
       sources = cmp.config.sources({
         { name = 'nvim_lsp' },

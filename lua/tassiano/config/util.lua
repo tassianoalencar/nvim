@@ -1,4 +1,5 @@
 local api = vim.api
+
 ---@class NeoUtils
 local M = {}
 
