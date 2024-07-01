@@ -5,7 +5,7 @@ return {
     local lint = require("lint")
 
     lint.linters_by_ft = {
-      php = { "phpstan" }
+      php = { "phpcs" }
     }
 
     vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {

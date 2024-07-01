@@ -4,6 +4,7 @@ local lspconfig = require("lspconfig")
 local mason = require("mason")
 local mason_lspconfig = require("mason-lspconfig")
 local utils = require("tassiano.config.util")
+
 local border = {
   { "🭽", "FloatBorder" },
   { "▔", "FloatBorder" },
@@ -83,6 +84,17 @@ function M.setup()
     ensure_installed = servers,
     automatic_installation = true,
     ui = { check_outdated_servers_on_open = true },
+  })
+
+  require("mason-tool-installer").setup({
+    ensure_installed = {
+      "prettier",
+      "stylua",
+      "isort",
+      "black",
+      "easy-coding-standard",
+      "phpcs",
+    },
   })
 
   local handlers = {
