@@ -1,4 +1,4 @@
-require('config.options')
-require('config.keymaps')
-require('config.autocmd')
-require('config.lazy')
+require('tassiano.config.options')
+require('tassiano.config.keymaps')
+require('tassiano.config.autocmd')
+require('tassiano.config.lazy')

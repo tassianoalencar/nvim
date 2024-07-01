@@ -1,4 +1,4 @@
-local util = require("config.util")
+local util = require("tassiano.config.util")
 
 -- highlight yank
 vim.api.nvim_create_autocmd("TextYankPost", {
