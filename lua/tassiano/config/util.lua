@@ -140,7 +140,7 @@ function M.exists_in_table(table, value)
 end
 
 M.augroup = function(name)
-  return vim.api.nvim_create_augroup("tassiano_" .. name, { clear = true })
+  return vim.api.nvim_create_augroup("mago_" .. name, { clear = true })
 end
 
 M.CREATE_UNDO = vim.api.nvim_replace_termcodes("<c-G>u", true, true, true)
@@ -170,5 +170,16 @@ M.cmp_confirm = function(opts)
     return fallback()
   end
 end
+
+M.border = {
+  { "🭽", "FloatBorder" },
+  { "▔", "FloatBorder" },
+  { "🭾", "FloatBorder" },
+  { "▕", "FloatBorder" },
+  { "🭿", "FloatBorder" },
+  { "▁", "FloatBorder" },
+  { "🭼", "FloatBorder" },
+  { "▏", "FloatBorder" },
+}
 
 return M

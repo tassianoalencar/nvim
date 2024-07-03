@@ -22,3 +22,7 @@ map.set("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 
 map.set("v", "<", "<gv")
 map.set("v", ">", ">gv")
+
+map.set("n", "<leader>i", function()
+    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hist.is_enabled({0}, {0}))
+end, { desc = "Inlay Hints" })

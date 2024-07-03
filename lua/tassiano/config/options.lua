@@ -3,8 +3,8 @@ vim.cmd("let g:netrw_liststyle = 3")
 local opt = vim.opt
 
 opt.clipboard:append("unnamedplus")
-opt.tabstop = 4
-opt.shiftwidth = 4
+opt.tabstop = 2
+opt.shiftwidth = 2
 opt.expandtab = true
 opt.autoindent = true
 opt.ignorecase = true
@@ -23,3 +23,12 @@ opt.pumheight = 10
 opt.backup = false
 opt.writebackup = false
 opt.swapfile = false
+
+-- Fold
+opt.foldmethod = "expr"
+opt.foldmethod = "expr"
+opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+opt.foldtext = ""
+opt.foldlevel = 99
+opt.foldlevelstart = 99
+opt.foldnestmax = 4

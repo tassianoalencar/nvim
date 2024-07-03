@@ -16,7 +16,7 @@ return {
   end,
   opts = {
     auto_install = true,
-    ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "javascript", "json", "typescript", "php", "html", "css" },
+    ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "javascript", "json", "typescript", "php", "html", "css", "markdown" },
     highlight = { enable = true, use_languagetree = true },
     indent = { enable = true },
     rainbow = { enable = true, extended_mode = true, max_file_lines = 1000 },

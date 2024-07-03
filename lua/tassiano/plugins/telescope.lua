@@ -3,22 +3,24 @@ return {
     "nvim-telescope/telescope.nvim",
     lazy = false,
     dependencies = {
-      "nvim-lua/plenary.nvim", -- Power telescope with FZF
+      { "nvim-lua/plenary.nvim" },
       { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-      "nvim-telescope/telescope-rg.nvim",
-      "nvim-telescope/telescope-node-modules.nvim",
+      { "nvim-telescope/telescope-rg.nvim" },
     },
     config = function()
-      require("telescope").setup({
+      local telescope = require("telescope")
+      local actions = require("telescope.actions")
+
+      telescope.setup({
         defaults = {
           mappings = {
             i = {
-              ["<Esc>"] = require("telescope.actions").close,                   -- don't go into normal mode, just close
-              ["<C-j>"] = require("telescope.actions").move_selection_next,     -- scroll the list with <c-j>
-              ["<C-k>"] = require("telescope.actions").move_selection_previous, -- scroll the list with <c-k>
-              ["<C-t>"] = require("telescope.actions").select_tab,              -- open selection in new tab
-              ["<C-y>"] = require("telescope.actions").preview_scrolling_up,
-              ["<C-e>"] = require("telescope.actions").preview_scrolling_down,
+              ["<Esc>"] = actions.close,
+              ["<C-j>"] = actions.move_selection_next,
+              ["<C-k>"] = actions.move_selection_previous,
+              ["<C-t>"] = actions.select_tab,
+              ["<C-y>"] = actions.preview_scrolling_up,
+              ["<C-e>"] = actions.preview_scrolling_down,
             },
           },
           vimgrep_arguments = {
@@ -66,24 +68,6 @@ return {
           fzf = { fuzzy = true, override_generic_sorter = true, override_file_sorter = true, case_mode = "smart_case" },
         },
       })
-
-      vim.keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", {})
-      vim.keymap.set("n", "<leader>fs", "<cmd>Telescope git_files<cr>", {})
-      vim.keymap.set("n", "<leader>fo", "<cmd>Telescope oldfiles<cr>", {})
-      vim.keymap.set("n", "<leader>fn", "<cmd>Telescope node_modules list<cr>", {})
-      vim.keymap.set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", {})
-      vim.keymap.set("n", "<leader>fr", "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<cr>", {})
-      vim.keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>", {})
-      vim.keymap.set("n", "<leader>r", "<cmd>Telescope buffers<cr>", {})
-      vim.keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", {})
-
-      -- if vim.fn.isdirectory(".git") then
-      --   nnoremap("<leader>t", "<cmd>Telescope git_files<cr>")
-      --   nnoremap("<D-p>", "<cmd>Telescope git_files<cr>")
-      -- else
-      --   nnoremap("<leader>t", "<cmd>Telescope find_files<cr>")
-      --   nnoremap("<D-p>", "<cmd>Telescope find_files<cr>")
-      -- end
     end,
   },
 }
