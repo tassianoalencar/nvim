@@ -171,6 +171,7 @@ M.cmp_confirm = function(opts)
   end
 end
 
+---@return table
 M.border = {
   { "🭽", "FloatBorder" },
   { "▔", "FloatBorder" },
