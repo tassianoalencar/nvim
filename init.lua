@@ -1,4 +1,4 @@
-require('tassiano.config.options')
-require('tassiano.config.keymaps')
-require('tassiano.config.autocmd')
-require('tassiano.config.lazy')
+require('alencar.core.opts')
+require('alencar.core.keymaps')
+require('alencar.core.autocmd')
+require('alencar.core.lazy')

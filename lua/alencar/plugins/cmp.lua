@@ -14,9 +14,8 @@ return {
   config = function()
     local cmp = require("cmp")
     local luasnip = require("luasnip")
-    local codeium = require("codeium")
-
-    codeium.setup({})
+    -- local codeium = require("codeium")
+    -- codeium.setup({})
 
     -- Define HL Groups
     cmp.setup({
