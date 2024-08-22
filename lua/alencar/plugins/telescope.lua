@@ -8,7 +8,8 @@ local M = {
 
 M.dependencies = {
   { "nvim-lua/plenary.nvim" },
-  { "nvim-telescope/telescope-fzf-native.nvim", build = "make" }
+  { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+  { "nvim-telescope/telescope-ui-select.nvim" }
 }
 
 M.event = "VimEnter"
@@ -27,8 +28,14 @@ M.config = function ()
         }
       },
     },
+    extensions = {
+      ['ui-select'] = {
+        require('telescope.themes').get_dropdown({}),
+      },
+    }
   }
 
+  telescope.load_extension 'ui-select'
   telescope.load_extension 'fzf'
 
   keymap("n", "<leader>ff", builtin.find_files, {})
