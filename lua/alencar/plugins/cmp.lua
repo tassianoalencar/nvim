@@ -17,6 +17,19 @@ return {
     -- local codeium = require("codeium")
     -- codeium.setup({})
 
+    local function border(hl_name)
+      return {
+        { "┌", hl_name },
+        { "─", hl_name },
+        { "┐", hl_name },
+        { "│", hl_name },
+        { "┘", hl_name },
+        { "─", hl_name },
+        { "└", hl_name },
+        { "│", hl_name },
+      }
+    end
+
     -- Define HL Groups
     cmp.setup({
       experimental = {
@@ -30,7 +43,11 @@ return {
       },
       window = {
         completion = cmp.config.window.bordered(),
-        documentation = cmp.config.window.bordered(),
+        documentation = {
+          border = border "CmpDocBorder",
+          winhighlight = "Normal:CmpDoc",
+        }
+        -- documentation = cmp.config.window.bordered(),
       },
       sources = cmp.config.sources({
         { name = "nvim_lsp" },
