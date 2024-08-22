@@ -164,6 +164,7 @@ return {
       -- tsserver = {},
       --
 
+      intelephense = {},
       lua_ls = {
         -- cmd = {...},
         -- filetypes = { ...},
