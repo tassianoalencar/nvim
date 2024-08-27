@@ -40,4 +40,14 @@ return {
 			vim.cmd.colorscheme(colorscheme)
 		end,
 	},
+
+	{
+		dir = "/home/tassiano/Code/opensource/anysphere.nvim",
+		lazy = false,
+		priority = 1000,
+		config = function()
+			-- require("flow").setup({})
+			vim.cmd.colorscheme(colorscheme)
+		end,
+	},
 }
