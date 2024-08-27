@@ -1,5 +1,10 @@
 return {
 	{
+		"folke/ts-comments.nvim",
+		event = "VeryLazy",
+		opts = {},
+	},
+	{
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
 		version = false,
