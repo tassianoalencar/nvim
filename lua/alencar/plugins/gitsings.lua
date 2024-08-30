@@ -34,34 +34,30 @@ return {
 			end)
 
 			-- Actions
-			map("n", "<leader>hs", gitsigns.stage_hunk)
-			map("n", "<leader>hr", gitsigns.reset_hunk)
-			map("v", "<leader>hs", function()
+			map("n", "<leader>gs", gitsigns.stage_hunk, { desc = "Git stage hunk" })
+			map("n", "<leader>gr", gitsigns.reset_hunk, { desc = "Git reset hunk" })
+			map("v", "<leader>gs", function()
 				gitsigns.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
-			end)
-			map("v", "<leader>hr", function()
+			end, { desc = "Git stage hunk" })
+			map("v", "<leader>gr", function()
 				gitsigns.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
-			end)
-			map("n", "<leader>hS", gitsigns.stage_buffer)
-			map("n", "<leader>hu", gitsigns.undo_stage_hunk)
-			map("n", "<leader>hR", gitsigns.reset_buffer)
-			map("n", "<leader>hp", gitsigns.preview_hunk)
-			map("n", "<leader>hb", function()
+			end, { desc = "Git reset hunk" })
+			map("n", "<leader>gS", gitsigns.stage_buffer, { desc = "Git stage buffer" })
+			map("n", "<leader>gu", gitsigns.undo_stage_hunk, { desc = "Git undo stage hunk" })
+			map("n", "<leader>gR", gitsigns.reset_buffer, { desc = "Git reset buffer" })
+			map("n", "<leader>gp", gitsigns.preview_hunk, { desc = "Git preview hunk" })
+			map("n", "<leader>gb", function()
 				gitsigns.blame_line({ full = true })
-			end)
-			map("n", "<leader>tb", gitsigns.toggle_current_line_blame)
-			map("n", "<leader>hd", gitsigns.diffthis)
+			end, { desc = "Git blame_line" })
+			map("n", "<leader>tb", gitsigns.toggle_current_line_blame, { desc = "" })
+			map("n", "<leader>hd", gitsigns.diffthis, { desc = "" })
 			map("n", "<leader>hD", function()
 				gitsigns.diffthis("~")
-			end)
-			map("n", "<leader>td", gitsigns.toggle_deleted)
+			end, { desc = "" })
+			map("n", "<leader>td", gitsigns.toggle_deleted, { desc = "" })
 
 			-- Text object
 			map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
 		end,
-	},
-	keys = {
-		{ "<leader>gb", "<cmd>Gitsigns blame<cr>", desc = "Git blame" },
-		{ "<leader>gl", "<cmd>Gitsigns blame_line<cr>", desc = "Git blame line" },
 	},
 }
