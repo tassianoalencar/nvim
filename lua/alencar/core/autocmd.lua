@@ -1,10 +1,17 @@
 local api = vim.api
 
-api.nvim_create_autocmd('TextYankPost', {
-  desc = 'Highlight when yanking (copying) text',
-  group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
-  callback = function()
-    vim.highlight.on_yank()
-  end,
+api.nvim_create_autocmd("TextYankPost", {
+	desc = "Highlight when yanking (copying) text",
+	group = api.nvim_create_augroup("alencar_yanking", { clear = true }),
+	callback = function()
+		vim.highlight.on_yank()
+	end,
 })
 
+api.nvim_create_autocmd("VimEnter", {
+	desc = "Update automatic plugins",
+	group = api.nvim_create_augroup("alencar_update", { clear = true }),
+	callback = function()
+		require("lazy").update({ show = false })
+	end,
+})

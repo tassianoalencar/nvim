@@ -6,7 +6,7 @@ end
 
 local servers = {
 	pyright = {},
-	tsserver = {},
+	ts_ls = {},
 	intelephense = {},
 	lua_ls = {
 		settings = {

@@ -1,8 +1,4 @@
-local colorscheme = "catppuccin"
-
 return {
-
-	-- catppuccin
 	{
 		"catppuccin/nvim",
 		lazy = false,
@@ -15,29 +11,7 @@ return {
 				no_bold = true,
 			})
 
-			vim.cmd.colorscheme(colorscheme)
-		end,
-	},
-
-	-- vscode
-	{
-		"Mofiqul/vscode.nvim",
-		lazy = false,
-		priority = 1000,
-		config = function()
-			require("vscode").setup({})
-			vim.cmd.colorscheme(colorscheme)
-		end,
-	},
-
-	-- flow
-	{
-		"0xstepit/flow.nvim",
-		lazy = false,
-		priority = 1000,
-		config = function()
-			require("flow").setup({})
-			vim.cmd.colorscheme(colorscheme)
+			vim.cmd.colorscheme("catppuccin-mocha")
 		end,
 	},
 }
