@@ -8,6 +8,14 @@ local servers = {
 	pyright = {},
 	ts_ls = {},
 	intelephense = {},
+	volar = {
+		init_options = {
+			vue = {
+				hybridMode = true,
+			},
+		},
+	},
+	vtsls = {},
 	lua_ls = {
 		settings = {
 			Lua = {
@@ -36,6 +44,11 @@ M.dependencies = {
 
 -- NOTE :help lsp-vs-treesitter
 M.config = function()
+	vim.fn.sign_define("DiagnosticSignError", { text = "e", texthl = "DiagnosticSignError" })
+	vim.fn.sign_define("DiagnosticSignWarn", { text = "w", texthl = "DiagnosticSignWarn" })
+	vim.fn.sign_define("DiagnosticSignInfo", { text = "i", texthl = "DiagnosticSignInfo" })
+	vim.fn.sign_define("DiagnosticSignHint", { text = "h", texthl = "DiagnosticSignHint" })
+
 	capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
 	require("mason").setup()
@@ -110,13 +123,15 @@ api.nvim_create_autocmd("LspAttach", {
 				callback = vim.lsp.buf.clear_references,
 			})
 
-			vim.api.nvim_create_autocmd("LspDetach", {
-				group = vim.api.nvim_create_augroup("kickstart-lsp-detach", { clear = true }),
-				callback = function(event2)
-					vim.lsp.buf.clear_references()
-					vim.api.nvim_clear_autocmds({ group = "kickstart-lsp-highlight", buffer = event2.buf })
-				end,
-			})
+			-- TODO
+			-- Verificar a melhor forma de remover o lsp quando o buffer for fechado
+			-- vim.api.nvim_create_autocmd("LspDetach", {
+			-- 	group = vim.api.nvim_create_augroup("kickstart-lsp-detach", { clear = true }),
+			-- 	callback = function(event2)
+			-- 		vim.lsp.buf.clear_references()
+			-- 		vim.api.nvim_clear_autocmds({ group = "kickstart-lsp-highlight", buffer = event2.buf })
+			-- 	end,
+			-- })
 		end
 
 		if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then

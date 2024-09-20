@@ -48,6 +48,7 @@ return {
 				"typescript",
 				"vim",
 				"yaml",
+				"vue",
 			},
 			incremental_selection = {
 				enable = true,
