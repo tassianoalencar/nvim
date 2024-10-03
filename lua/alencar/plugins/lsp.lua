@@ -15,7 +15,6 @@ local servers = {
 			},
 		},
 	},
-	vtsls = {},
 	lua_ls = {
 		settings = {
 			Lua = {
@@ -40,6 +39,7 @@ M.dependencies = {
 	{ "WhoIsSethDaniel/mason-tool-installer.nvim" },
 	{ "j-hui/fidget.nvim", opts = {} },
 	{ "hrsh7th/cmp-nvim-lsp" },
+	{ "nvim-lua/plenary.nvim" },
 }
 
 -- NOTE :help lsp-vs-treesitter
