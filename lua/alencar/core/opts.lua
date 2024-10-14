@@ -1,6 +1,10 @@
 local global = vim.g
 local opt = vim.opt
 
+-- Theme
+global.nightflyItalics = false
+global.nightflyTransparent = true
+
 global.mapleader = " "
 global.maplocalleader = " "
 global.have_nerd_font = true

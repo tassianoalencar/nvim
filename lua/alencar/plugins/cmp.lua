@@ -1,78 +1,137 @@
-local utils_cmp = require("alencar.utils.cmp")
-
-return {
+local M = {
 	"hrsh7th/nvim-cmp",
-	version = false,
-	event = "InsertEnter",
+	event = { "InsertEnter", "CmdlineEnter" },
 	dependencies = {
-		"hrsh7th/cmp-nvim-lsp",
-		"hrsh7th/cmp-buffer",
 		"hrsh7th/cmp-path",
+		"hrsh7th/cmp-buffer",
+		"hrsh7th/cmp-cmdline",
+		"hrsh7th/cmp-emoji",
+		"hrsh7th/cmp-nvim-lsp",
+		"hrsh7th/cmp-nvim-lsp-signature-help",
+		"hrsh7th/cmp-nvim-lua",
+		"saadparwaiz1/cmp_luasnip",
+		"L3MON4D3/LuaSnip",
+		"rafamadriz/friendly-snippets",
 	},
-	opts = function()
-		vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
-
-		local cmp = require("cmp")
-		local defaults = require("cmp.config.default")()
-		local auto_select = true
-
-		return {
-			sorting = defaults.sorting,
-			auto_brackets = {},
-			completion = {
-				completeopt = "menu,menuone,noinsert" .. (auto_select and "" or ",noselect"),
-			},
-			preselect = auto_select and cmp.PreselectMode.Item or cmp.PreselectMode.None,
-			mapping = cmp.mapping.preset.insert({
-				["<C-b>"] = cmp.mapping.scroll_docs(-4),
-				["<C-f>"] = cmp.mapping.scroll_docs(4),
-				["<C-Space>"] = cmp.mapping.complete(),
-				["<CR>"] = utils_cmp.confirm({ select = auto_select }),
-				["<C-y>"] = utils_cmp.confirm({ select = true }),
-				["<S-CR>"] = utils_cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace }),
-				["<C-CR>"] = function(fallback)
-					cmp.abort()
-					fallback()
-				end,
-			}),
-			sources = cmp.config.sources({
-				{ name = "nvim_lsp" },
-				{ name = "path" },
-			}, {
-				{ name = "buffer" },
-			}),
-			formatting = {
-				expandable_indicator = true,
-				fields = { "menu", "abbr", "kind" },
-				format = function(entry, item)
-					item.menu = utils_cmp.map_item.source[entry.source.name] or entry.source.name
-					item.abbr = vim.trim(item.abbr):sub(1, 40)
-					item.kind = item.menu == "" and " " or utils_cmp.map_item.type[item.kind]
-					return item
-				end,
-			},
-			window = {
-				completion = {
-					border = "single",
-					zindex = 100,
-					scrolloff = 4,
-					col_offset = 4,
-					winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None",
-				},
-				documentation = {
-					border = "single",
-					zindex = 100,
-					scrolloff = 4,
-					max_width = 60,
-					max_height = 20,
-					winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None",
-				},
-			},
-			experimental = {
-				ghost_text = {
-					hl_group = "CmpGhostText",
-				},
-			},
-		}
-	end,
 }
+
+function M.config()
+	local cmp = require("cmp")
+	local luasnip = require("luasnip")
+
+	cmp.setup({
+		completion = {
+			completeopt = table.concat(vim.opt.completeopt:get(), ","),
+		},
+
+		snippet = {
+			expand = function(args)
+				luasnip.lsp_expand(args.body) -- Luasnip expand
+			end,
+		},
+
+		mapping = cmp.mapping.preset.insert({
+			-- Scroll text in documentation window
+			["<C-u>"] = cmp.mapping.scroll_docs(-4),
+			["<C-d>"] = cmp.mapping.scroll_docs(4),
+			-- Jump to the next placeholder in the snippet.
+			["<C-f>"] = cmp.mapping(function(fallback)
+				if luasnip.jumpable(1) then
+					luasnip.jump(1)
+				else
+					fallback()
+				end
+			end),
+			-- go to previous placeholder in the snippet
+			["<C-b>"] = cmp.mapping(function(fallback)
+				if luasnip.jumpable(-1) then
+					luasnip.jump(-1)
+				else
+					fallback()
+				end
+			end),
+			["<C-e>"] = cmp.mapping.abort(),
+			["<C-y>"] = cmp.mapping(function(fallback)
+				if cmp.visible() and cmp.get_selected_entry() then
+					cmp.confirm({ behavior = cmp.ConfirmBehavior.Insert })
+				else
+					fallback()
+				end
+			end),
+			["<CR>"] = cmp.mapping(function(fallback)
+				if cmp.visible() and cmp.get_selected_entry() then
+					cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace })
+				else
+					fallback()
+				end
+			end),
+			["<Tab>"] = cmp.mapping(function(fallback)
+				if cmp.visible() then
+					cmp.select_next_item()
+				elseif luasnip.expand_or_locally_jumpable() then
+					luasnip.expand_or_jump()
+				else
+					fallback()
+				end
+			end, { "i", "s" }),
+			["<S-Tab>"] = cmp.mapping(function(fallback)
+				if cmp.visible() then
+					cmp.select_prev_item()
+				elseif luasnip.jumpable(-1) then
+					luasnip.jump(-1)
+				else
+					fallback()
+				end
+			end, { "i", "s" }),
+		}),
+
+		sources = cmp.config.sources({
+			{ name = "nvim_lsp" }, -- LSP
+			{ name = "nvim_lsp_signature_help" }, -- LSP for parameters in functions
+			{ name = "supermaven" },
+			{ name = "luasnip" }, -- Luasnip
+		}, {
+			-- { name = "nvim_lua" }, -- Lua Neovim API
+			{ name = "buffer" },
+			{ name = "path" }, -- Paths
+		}),
+
+		window = {
+			completion = {
+				winhighlight = "Normal:Pmenu,CursorLine:PmenuSel,Search:PmenuSel",
+				scrollbar = false,
+			},
+			documentation = {
+				winhighlight = "Normal:CmpDoc",
+			},
+		},
+	})
+
+	-- Use buffer source for `/` and `?` (don't enable `native_menu`, otherwise this won't work).
+	cmp.setup.cmdline({ "/", "?" }, {
+		mapping = cmp.mapping.preset.cmdline(),
+
+		sources = {
+			{ name = "buffer" },
+		},
+	})
+
+	-- Use cmdline & path source for ':' (don't enable `native_menu`, otherwise this won't work).
+	cmp.setup.cmdline(":", {
+		mapping = cmp.mapping.preset.cmdline({
+			-- ["<C-y>"] = {
+			-- 	c = cmp.mapping.close(), --avoids ghost text behavior with noice
+			-- },
+		}),
+		sources = cmp.config.sources({
+			{ name = "cmdline" },
+		}, {
+			{ name = "path" },
+		}),
+	})
+
+	-- Add snippets from Friendly Snippets
+	require("luasnip/loaders/from_vscode").lazy_load()
+end
+
+return M
