@@ -1,14 +1,3 @@
-local telescope_border = {
-	"─",
-	"│",
-	"─",
-	"│",
-	"┌",
-	"┐",
-	"┘",
-	"└",
-}
-
 local M = {
 	"nvim-telescope/telescope.nvim",
 }
@@ -28,7 +17,6 @@ M.config = function()
 
 	telescope.setup({
 		defaults = {
-			borderchars = telescope_border,
 			path_display = {
 				filename_first = {
 					reverse_directories = false,
@@ -47,6 +35,7 @@ M.config = function()
 
 	keymap("n", "<leader>ff", builtin.find_files, {})
 	keymap("n", "<leader>fg", builtin.live_grep, {})
+	keymap("n", "<leader> ", builtin.buffers, {})
 end
 
 return M
