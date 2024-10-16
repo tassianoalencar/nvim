@@ -15,3 +15,11 @@ api.nvim_create_autocmd("VimEnter", {
 		require("lazy").update({ show = false })
 	end,
 })
+
+api.nvim_create_autocmd("BufEnter", {
+	desc = "Disable comment on linebreak",
+	group = api.nvim_create_augroup("alencar_comment", { clear = true }),
+	callback = function()
+		vim.opt_local.formatoptions:remove({ "c", "r", "o" })
+	end,
+})
