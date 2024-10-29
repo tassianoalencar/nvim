@@ -1,9 +1,7 @@
 local global = vim.g
 local opt = vim.opt
 
--- Theme
-global.nightflyItalics = false
-global.nightflyTransparent = true
+global.material_style = "deep ocean"
 
 global.mapleader = " "
 global.maplocalleader = " "
@@ -61,6 +59,7 @@ opt.foldtext = "v:lua.vim.treesitter.foldtext()"
 
 opt.listchars = "eol:¬,tab:>·,trail:~,extends:>,precedes:<" -- requried for checking formatting using :set list
 opt.diffopt:append("iwhiteall")
+opt.background = "light"
 
 -- Function to set unique options based on filetype
 local function set_tab_options(filetype, options)

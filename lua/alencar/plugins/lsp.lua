@@ -8,6 +8,7 @@ local servers = {
 	pyright = {},
 	ts_ls = {},
 	intelephense = {},
+	sqlls = {},
 	volar = {
 		init_options = {
 			vue = {
