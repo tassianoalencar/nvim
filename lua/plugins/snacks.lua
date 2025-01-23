@@ -1,0 +1,42 @@
+return {
+  "folke/snacks.nvim",
+  priority = 1000,
+  lazy = false,
+  ---@type snacks.Config
+  opts = {
+    animate = { enable = true },
+    bigfile = { enable = true },
+    bufdelete = { enable = true },
+    dashboard = { enable = true },
+    debug = { enable = true },
+    dim = { enable = true },
+    git = { enable = true },
+    gitbrowse = { enable = true },
+    indent = { enable = true },
+    input = { enable = true },
+    layout = {enable = true },
+    lazygit = {enable = true },
+    notifier = {enable = true},
+    notify = {enable = true},
+    picker = {enable = true},
+    profiler = {enable = true},
+    quickfile = {enable = true},
+    rename = {enable = true },
+    scope = {enable = true},
+    scratch = {enable = true},
+    scroll = {enable = true},
+    statuscolumn = {enable = true},
+    terminal = {enable = true },
+    toggle = {enable = true},
+    util = {enable = true},
+    win = {enable = true},
+    words = {enable = true},
+    zen = {enable = true }
+  },
+  keys = {
+    { "<leader>uz",  function() Snacks.zen() end, desc = "Toggle Zen Mode" },
+    { "<leader>.",  function() Snacks.scratch() end, desc = "Toggle Scratch Buffer" },
+    { "<leader>S",  function() Snacks.scratch.select() end, desc = "Select Scratch Buffer" },
+    { "<leader>gb", function() Snacks.git.blame_line() end, desc = "Git Blame Line" },
+  }
+}
