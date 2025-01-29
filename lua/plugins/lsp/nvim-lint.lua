@@ -1,3 +1,5 @@
+if true then return {} end
+
 local autolint_on = true
 
 vim.api.nvim_create_user_command('ToggleAutoLint', function()

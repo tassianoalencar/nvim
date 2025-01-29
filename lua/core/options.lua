@@ -34,7 +34,7 @@ opt.sidescrolloff = 8 -- Columns of context
 opt.signcolumn = 'yes' -- Always show the signcolumn, otherwise it would shift the text each time
 opt.smartcase = true -- Don't ignore case with capitals
 opt.smartindent = true -- Insert indents automatically
-opt.spell = true
+opt.spell = false
 opt.spelllang = 'pt_br,en'
 opt.splitbelow = true -- Put new windows below current
 opt.splitkeep = 'screen'
@@ -61,8 +61,17 @@ vim.o.foldlevelstart = 99
 vim.o.foldenable = true
 vim.o.foldmethod = 'manual' -- for treesitter / lsp folding, the rest of ufo gets used
 
+vim.o.fillchars = "eob: "
+
+
 -- Fix markdown indentation settings
 vim.g.markdown_recommended_style = 0
 
 -- put :messages in a new buffer
 vim.api.nvim_command 'command! Messages enew | execute "redir @a" | silent messages | redir END | normal! "ap'
+
+
+---@type rest.Opts
+vim.g.rest_nvim = {
+
+}

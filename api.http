@@ -1,0 +1,5 @@
+### Dashboard Antenou
+GET {{BASE_URL}}/antenou/dashboard/1
+authorization: {{TOKEN}}
+Content-Type: application/json
+

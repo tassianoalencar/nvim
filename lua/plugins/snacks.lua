@@ -12,7 +12,15 @@ return {
     dim = { enable = true },
     git = { enable = true },
     gitbrowse = { enable = true },
-    indent = { enable = true },
+    indent = {
+      enable = true,
+      indent = {
+        char = '|',
+      },
+      scope = {
+        char = '|',
+      }
+    },
     input = { enable = true },
     layout = {enable = true },
     lazygit = {enable = true },
@@ -59,6 +67,7 @@ return {
     { "<leader>fb", function() Snacks.picker.buffers() end, desc = "Buffers" },
     { "<leader>fw", function() Snacks.picker.grep() end, desc = "Grep" },
     { "<leader>f:", function() Snacks.picker.command_history() end, desc = "Command History" },
+    { "<leader>f/", function() Snacks.picker.grep_word() end, desc = "Find word in file" },
 
     -- LSP
     { "gd", function() Snacks.picker.lsp_definitions() end, desc = "Goto Definition" },

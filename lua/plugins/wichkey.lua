@@ -10,6 +10,10 @@ local normal_mode = {
   { '<leader>u', group = ' Ui' },
   { '<leader>g', group = ' Git' },
   { '<leader>f', group = ' Find' },
+  { '<leader>l', group = ' LSP' },
+  { '<leader>b', group = ' Buffer' },
+  { '<leader>lrn', function() vim.lsp.buf.rename() end, desc = "Rename" },
+
 }
 
 M.opts = {
