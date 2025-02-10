@@ -7,12 +7,10 @@ M.dependencies = { { 'echasnovski/mini.icons', opts = {} } }
 ---@module 'oil'
 ---@type oil.SetupOpts
 M.opts = {
+  default_file_explorer = false,
   view_options = {
     show_hidden = true,
-  },
-  float = {
-    padding = 10,
-  },
+  }
 }
 
 M.keys = {
