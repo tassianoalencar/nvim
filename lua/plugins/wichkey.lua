@@ -13,7 +13,6 @@ local normal_mode = {
   { '<leader>l', group = ' LSP' },
   { '<leader>b', group = ' Buffer' },
   { '<leader>lrn', function() vim.lsp.buf.rename() end, desc = "Rename" },
-
 }
 
 M.opts = {

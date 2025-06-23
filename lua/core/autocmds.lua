@@ -1,21 +1,16 @@
--- [[ Highlight on yank ]]
--- See `:help vim.highlight.on_yank()`
-local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
-vim.api.nvim_create_autocmd('TextYankPost', {
+local augroup = vim.api.nvim_create_augroup
+local autocmd = vim.api.nvim_create_autocmd
+
+autocmd('TextYankPost', {
+  pattern = '*',
+  group =  augroup('YankHighlight', { clear = true }),
   callback = function()
     vim.highlight.on_yank { higroup = 'YankHighlight', priority = 10000 }
   end,
-  group = highlight_group,
-  pattern = '*',
 })
-vim.cmd [[highlight YankHighlight guifg=#000000 guibg=#FAB387 gui=nocombine]]
 
--- @author: astrovim:
--- creates a augroup _file_opened that checks whether a file was opened. (Not alpha dashboard) or other files with no name,
--- and runs the "User FileOpened" automcmd once.
--- this allows plugins to only load once a file was loaded. Not in the dashboard. Increasing the startup time for things like treesitter, wich would normally load in alpha dashboard BufRead, BufWinEnter or BufNewFile
-vim.api.nvim_create_augroup('_file_opened', { clear = true })
-vim.api.nvim_create_autocmd({ 'BufRead', 'BufWinEnter', 'BufNewFile' }, {
+augroup('_file_opened', { clear = true })
+autocmd({ 'BufRead', 'BufWinEnter', 'BufNewFile' }, {
   group = '_file_opened',
   nested = true,
   callback = function(args)
@@ -27,3 +22,5 @@ vim.api.nvim_create_autocmd({ 'BufRead', 'BufWinEnter', 'BufNewFile' }, {
     end
   end,
 })
+
+vim.cmd [[highlight YankHighlight guifg=#000000 guibg=#72FCF3 gui=nocombine]]

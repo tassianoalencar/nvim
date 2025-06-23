@@ -1,5 +1,6 @@
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
+local keymap = vim.keymap.set
 
 local M = {
   'neovim/nvim-lspconfig',
@@ -74,29 +75,8 @@ M.config = function()
   autocmd('LspAttach', {
     group = augroup('lsp-attach', { clear = true }),
     callback = function(event)
-      vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action)
+      keymap('n', '<leader>ca', vim.lsp.buf.code_action)
 
-      -- vim.keymap.set('n', 'gd', require('fzf-lua').lsp_definitions)
-      -- vim.keymap.set('n', 'gr', require('fzf-lua').lsp_references)
-      -- vim.keymap.set('n', 'gI', require('fzf-lua').lsp_implementations)
-      -- vim.keymap.set('n', 'gI', require('fzf-lua').lsp_implementations)
-
-      -- lsp_references	References
-      -- lsp_definitions	Definitions
-      -- lsp_declarations	Declarations
-      -- lsp_typedefs	Type Definitions
-      -- lsp_implementations	Implementations
-      -- lsp_document_symbols	Document Symbols
-      -- lsp_workspace_symbols	Workspace Symbols
-      -- lsp_live_workspace_symbols	Workspace Symbols (live query)
-      -- lsp_incoming_calls	Incoming Calls
-      -- lsp_outgoing_calls	Outgoing Calls
-      -- lsp_code_actions	Code Actions
-      -- lsp_finder	All LSP locations, combined view
-      -- diagnostics_document	Document Diagnostics
-      -- diagnostics_workspace	Workspace Diagnostics
-      -- lsp_document_diagnostics	alias to diagnostics_document
-      -- lsp_workspace_diagnostics	alias to diagnostics_workspace
       local client = vim.lsp.get_client_by_id(event.data.client_id)
 
       if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
