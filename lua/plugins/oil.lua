@@ -2,7 +2,9 @@ local M = {
   'stevearc/oil.nvim',
 }
 
-M.dependencies = { { 'echasnovski/mini.icons', opts = {} } }
+M.dependencies = {{
+  'nvim-tree/nvim-web-devicons',
+}}
 
 ---@module 'oil'
 ---@type oil.SetupOpts
