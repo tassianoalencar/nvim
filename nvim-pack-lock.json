@@ -1,0 +1,54 @@
+{
+  "plugins": {
+    "github-nvim-theme": {
+      "rev": "c106c94",
+      "src": "https://github.com/projekt0n/github-nvim-theme"
+    },
+    "mini.nvim": {
+      "rev": "89eecd8",
+      "src": "https://github.com/nvim-mini/mini.nvim"
+    },
+    "multicursor.nvim": {
+      "rev": "0c6ceae",
+      "src": "https://github.com/jake-stewart/multicursor.nvim"
+    },
+    "neo-tree.nvim": {
+      "rev": "c4c168e",
+      "src": "https://github.com/nvim-neo-tree/neo-tree.nvim",
+      "version": "3.0.0 - 4.0.0"
+    },
+    "nui.nvim": {
+      "rev": "de74099",
+      "src": "https://github.com/MunifTanjim/nui.nvim"
+    },
+    "nvim-treesitter": {
+      "rev": "42fc28ba",
+      "src": "https://github.com/nvim-treesitter/nvim-treesitter",
+      "version": "'master'"
+    },
+    "nvim-treesitter-textobjects": {
+      "rev": "71385f1",
+      "src": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects"
+    },
+    "nvim-ts-context-commentstring": {
+      "rev": "1b212c2",
+      "src": "https://github.com/JoosepAlviste/nvim-ts-context-commentstring"
+    },
+    "nvim-various-textobjs": {
+      "rev": "aede158",
+      "src": "https://github.com/chrisgrieser/nvim-various-textobjs"
+    },
+    "nvim-web-devicons": {
+      "rev": "b8221e4",
+      "src": "https://github.com/nvim-tree/nvim-web-devicons"
+    },
+    "plenary.nvim": {
+      "rev": "b9fd522",
+      "src": "https://github.com/nvim-lua/plenary.nvim"
+    },
+    "vague.nvim": {
+      "rev": "cdbfdc8",
+      "src": "https://github.com/vague2k/vague.nvim"
+    }
+  }
+}

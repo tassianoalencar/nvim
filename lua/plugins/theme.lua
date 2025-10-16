@@ -1,26 +1,9 @@
--- return {
---   'navarasu/onedark.nvim',
---   config = function()
---     require('onedark').setup {
---       transparent = true,
---       style = 'darker', -- Default theme style. Choose between 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer' and 'light'
---     }
---
---     require('onedark').load()
---
---     vim.cmd 'colorscheme onedark'
---   end,
--- }
+vim.pack.add({
+  { src = 'https://github.com/projekt0n/github-nvim-theme' }
+})
 
-return {
-  'AstroNvim/astrotheme',
-  lazy = false, -- disable lazy loading
-  priority = 10000, -- load AstroUI first
-  config = function()
-    require('astrotheme').setup {
-      transparent = true,
-    }
+require('github-theme').setup({})
 
-    vim.cmd 'colorscheme astrodark'
-  end,
-}
+vim.cmd('colorscheme github_dark_default')
+vim.cmd(':hi statusline guibg=#161b22 guifg=#ffffff')
+vim.cmd(':hi CursorLine guibg=#161b22')
