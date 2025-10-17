@@ -1,16 +1,20 @@
 {
   "plugins": {
-    "github-nvim-theme": {
-      "rev": "c106c94",
-      "src": "https://github.com/projekt0n/github-nvim-theme"
+    "astrotheme": {
+      "rev": "4a2af93",
+      "src": "https://github.com/AstroNvim/astrotheme"
+    },
+    "base16-nvim": {
+      "rev": "dc28874",
+      "src": "https://github.com/wincent/base16-nvim"
+    },
+    "git-conflict.nvim": {
+      "rev": "a1badcd",
+      "src": "https://github.com/akinsho/git-conflict.nvim"
     },
     "mini.nvim": {
-      "rev": "89eecd8",
+      "rev": "8a7cf7e",
       "src": "https://github.com/nvim-mini/mini.nvim"
-    },
-    "multicursor.nvim": {
-      "rev": "0c6ceae",
-      "src": "https://github.com/jake-stewart/multicursor.nvim"
     },
     "neo-tree.nvim": {
       "rev": "c4c168e",
@@ -46,9 +50,13 @@
       "rev": "b9fd522",
       "src": "https://github.com/nvim-lua/plenary.nvim"
     },
-    "vague.nvim": {
-      "rev": "cdbfdc8",
-      "src": "https://github.com/vague2k/vague.nvim"
+    "tokyonight.nvim": {
+      "rev": "d14614c",
+      "src": "https://github.com/folke/tokyonight.nvim"
+    },
+    "vim-fugitive": {
+      "rev": "61b51c0",
+      "src": "https://github.com/tpope/vim-fugitive"
     }
   }
 }

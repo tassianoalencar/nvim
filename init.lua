@@ -1,8 +1,8 @@
 require('config.options')
 require('config.keymap')
 require('config.lsp')
-
 require('config.autocmd')
+require('plugins.git')
 require('plugins.mini')
 require('plugins.neotree')
 require('plugins.treesitter')

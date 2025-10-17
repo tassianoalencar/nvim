@@ -1,4 +1,4 @@
-require('config.server_manager')('lua-language-server', 'mkdir ~/.lua-language && git clone https://github.com/LuaLS/lua-language-server && cd ~/.lua-language && ./make.sh')
+require('config.server_manager')('lua-language-server', 'mkdir ~/.lua-language && git clone https://github.com/luals/lua-language-server && cd ~/.lua-language && ./make.sh')
 
 ---@type vim.lsp.Config
 return {

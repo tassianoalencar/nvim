@@ -1,9 +1,11 @@
 vim.pack.add({
-  { src = 'https://github.com/projekt0n/github-nvim-theme' }
+  { src = 'https://github.com/folke/tokyonight.nvim' },
+  { src = 'https://github.com/AstroNvim/astrotheme' }
 })
 
-require('github-theme').setup({})
+-- Tokyo Night Theme
+-- vim.cmd('colorscheme tokyonight-night')
 
-vim.cmd('colorscheme github_dark_default')
-vim.cmd(':hi statusline guibg=#161b22 guifg=#ffffff')
-vim.cmd(':hi CursorLine guibg=#161b22')
+-- AstroDark Theme
+require("astrotheme").setup()
+vim.cmd('colorscheme astrodark')

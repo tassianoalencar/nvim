@@ -23,4 +23,8 @@ keymap('n', '<leader>uo', ':update<cr> :source<cr>', { noremap = true, silent = 
 -- Finds
 keymap('n', '<leader>ff', ':Pick files<cr>', { noremap = true, silent = true, desc = 'Find Files' })
 keymap('n', '<leader>fb', ':Pick files<cr>', { noremap = true, silent = true, desc = 'Find Buffers' })
+keymap('n', '<leader>fw', ':Pick live_grep<cr>', { noremap = true, silent = true, desc = 'Find Buffers' })
 
+-- Buffers
+keymap('n', '<S-h>', ':bprev<cr>', { noremap = true, silent = true, desc = 'Previous Buffer' })
+keymap('n', '<S-l>', ':bnext<cr>', { noremap = true, silent = true, desc = 'Next Buffer' })

@@ -1,12 +1,11 @@
-local characters_size_completion = 1
+local COMPLETION_TRIGGER_LEN = 2
 
 -- Ativa os LSPs que você quiser
-vim.lsp.enable({ 'lua_ls', 'intelephense', 'html' })
+vim.lsp.enable({ 'lua_ls', 'intelephense', 'html', 'marksman', 'vtsls' })
 
 -- Diagnósticos visuais
 vim.diagnostic.config({
   virtual_text = true,
-  float = { border = 'rounded' },
 })
 
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -15,17 +14,26 @@ vim.api.nvim_create_autocmd('LspAttach', {
     local bufnr = ev.buf
 
     -- Keymaps gerais
-    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { buffer = bufnr, silent = true, noremap = true, desc = 'Goto Definition' })
-    vim.keymap.set('n', 'gr', vim.lsp.buf.references, { buffer = bufnr, silent = true, noremap = true, desc = 'Goto References' })
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = bufnr, silent = true, noremap = true, desc = 'Show Documentation' })
-    vim.keymap.set('n', '[d', function() vim.diagnostic.jump({ count = -1 }) end, { buffer = bufnr, silent = true, noremap = true, desc = 'Code Rename' })
-    vim.keymap.set('n', ']d', function() vim.diagnostic.jump({ count = 1 }) end, { buffer = bufnr, silent = true, noremap = true, desc = 'Code Rename' })
-    vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { buffer = bufnr, silent = true, noremap = true, desc = 'Code Rename' })
-    vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { buffer = bufnr, silent = true, noremap = true, desc = 'Code Action' })
+    vim.keymap.set('n', 'gd', vim.lsp.buf.definition,
+      { buffer = bufnr, silent = true, noremap = true, desc = 'Goto Definition' })
+    vim.keymap.set('n', 'gr', vim.lsp.buf.references,
+      { buffer = bufnr, silent = true, noremap = true, desc = 'Goto References' })
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover,
+      { buffer = bufnr, silent = true, noremap = true, desc = 'Show Documentation' })
+    vim.keymap.set('n', '[d', function() vim.diagnostic.jump({ count = -1 }) end,
+      { buffer = bufnr, silent = true, noremap = true, desc = 'Code Rename' })
+    vim.keymap.set('n', ']d', function() vim.diagnostic.jump({ count = 1 }) end,
+      { buffer = bufnr, silent = true, noremap = true, desc = 'Code Rename' })
+    vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename,
+      { buffer = bufnr, silent = true, noremap = true, desc = 'Code Rename' })
+    vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action,
+      { buffer = bufnr, silent = true, noremap = true, desc = 'Code Action' })
+    vim.keymap.set('n', '<leader>cf', ':lua vim.lsp.buf.format({ async = true })<cr>',
+      { desc = 'Code Format', silent = true })
 
     -- Autocomplete nativo
     if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_completion) then
-      vim.opt.completeopt = { 'menu', 'menuone', 'noinsert', 'popup' }
+      -- vim.opt.completeopt = { 'menu', 'menuone', 'noinsert', 'popup' }
       vim.opt.pumheight = 10
       vim.opt.shortmess:append('c')
 
@@ -74,7 +82,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
             typed = ""
           end
 
-          if #typed >= characters_size_completion then
+          if #typed >= COMPLETION_TRIGGER_LEN and vim.fn.pumvisible() ~= 1 then
             vim.schedule(function()
               vim.lsp.completion.get()
             end)
@@ -90,5 +98,3 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end
   end,
 })
-
-vim.keymap.set('n', '<leader>cf', ':lua vim.lsp.buf.format({ async = true })<cr>', { desc = 'Code Format', silent = true })

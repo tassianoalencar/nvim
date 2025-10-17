@@ -1,11 +1,15 @@
 -- options
 --------------------------------------------------------------------------------
+vim.o.winborder = 'single'
 vim.opt.synmaxcol = 500            -- disable "set syntax" for large files for better performance
 vim.opt.smartindent = true         -- smartly indent new lines
 vim.opt.breakindent = true         -- keep same indentation after break
 vim.opt.autowrite = true           -- Enable auto write
 vim.opt.clipboard = 'unnamedplus'  -- Sync with system clipboard
-vim.opt.completeopt = 'menu,menuone,noselect'
+
+-- vim.opt.completeopt = 'menu,menuone,noselect'
+vim.o.completeopt = 'menuone,noselect,fuzzy,nosort' -- Use custom behavior
+
 vim.opt.conceallevel = 2           -- Hide * markup for bold and italic, but not markers with substitutions
 vim.opt.confirm = true             -- Confirm to save changes before exiting modified buffer
 vim.opt.cursorline = true          -- Enable highlighting of the current line
@@ -50,14 +54,14 @@ vim.opt.cmdheight = 0
 
 vim.opt.laststatus = 3
 vim.opt.nrformats = 'bin,hex,alpha,octal,'
+vim.opt.path:append('**') -- adiciona ** no path para fazer buscas com :find nomearquido TAB
 
--- folding
+vim.o.iskeyword = '@,48-57,_,192-255,-' -- Treat dash as `word` textobject part
 vim.o.foldcolumn = '1'
 vim.o.foldlevel = 99
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true
 vim.o.foldmethod = 'manual' -- for treesitter / lsp folding, the rest of ufo gets used
-
 vim.o.fillchars = "eob: "
 
 -- Fix markdown indentation settings
