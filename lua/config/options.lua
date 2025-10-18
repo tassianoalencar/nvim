@@ -7,8 +7,8 @@ vim.opt.breakindent = true         -- keep same indentation after break
 vim.opt.autowrite = true           -- Enable auto write
 vim.opt.clipboard = 'unnamedplus'  -- Sync with system clipboard
 
--- vim.opt.completeopt = 'menu,menuone,noselect'
-vim.o.completeopt = 'menuone,noselect,fuzzy,nosort' -- Use custom behavior
+vim.opt.completeopt = 'menu,menuone,noselect'
+-- vim.o.completeopt = 'menuone,noselect,fuzzy,nosort' -- Use custom behavior
 
 vim.opt.conceallevel = 2           -- Hide * markup for bold and italic, but not markers with substitutions
 vim.opt.confirm = true             -- Confirm to save changes before exiting modified buffer

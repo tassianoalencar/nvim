@@ -1,3 +1,6 @@
-# My Neovim Configuration
+# Text Editing
 
-This configuration can be accessed on my [github](https://github.com/).
+- Navigation
+  - To the file
+  - Inside the file
+- Text change: add, delete, replace

@@ -9,10 +9,14 @@ require('mini.pick').setup()
 require('mini.pairs').setup()
 require('mini.surround').setup()
 require('mini.diff').setup()
-require('mini.statusline').setup()
 require('mini.tabline').setup()
 require('mini.tabline').setup()
 require('mini.indentscope').setup()
+require('mini.ai').setup()
+
+require('mini.statusline').setup({
+  use_icons = false
+})
 
 require('mini.clue').setup({
   window = {
@@ -28,4 +32,3 @@ require('mini.clue').setup({
     { mode = 'n', keys = '<Leader>u', desc = '+Utils' },
   },
 })
-
