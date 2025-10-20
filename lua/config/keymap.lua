@@ -22,9 +22,13 @@ keymap('n', '<leader>uo', ':update<cr> :source<cr>', { noremap = true, silent = 
 
 -- Finds
 keymap('n', '<leader>ff', ':Pick files<cr>', { noremap = true, silent = true, desc = 'Find Files' })
-keymap('n', '<leader>fb', ':Pick files<cr>', { noremap = true, silent = true, desc = 'Find Buffers' })
-keymap('n', '<leader>fw', ':Pick live_grep<cr>', { noremap = true, silent = true, desc = 'Find Buffers' })
+keymap('n', '<leader>fb', ':Pick buffers<cr>', { noremap = true, silent = true, desc = 'Find Buffers' })
+keymap('n', '<leader>fw', ':Pick grep_live<cr>', { noremap = true, silent = true, desc = 'Find Worlds' })
 
 -- Buffers
 keymap('n', '<S-h>', ':bprev<cr>', { noremap = true, silent = true, desc = 'Previous Buffer' })
 keymap('n', '<S-l>', ':bnext<cr>', { noremap = true, silent = true, desc = 'Next Buffer' })
+keymap('n', '<leader>bd', ':bd<cr>', { noremap = true, silent = true, desc = 'Delete Buffer' })
+
+-- Coder
+keymap('n', '<leader>cf', ':lua vim.lsp.buf.format()<cr>', { desc = 'Code Format', silent = true })
