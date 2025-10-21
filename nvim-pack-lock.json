@@ -12,6 +12,14 @@
       "rev": "a1badcd",
       "src": "https://github.com/akinsho/git-conflict.nvim"
     },
+    "github-nvim-theme": {
+      "rev": "c106c94",
+      "src": "https://github.com/projekt0n/github-nvim-theme"
+    },
+    "kanagawa.nvim": {
+      "rev": "aef7f5c",
+      "src": "https://github.com/rebelot/kanagawa.nvim"
+    },
     "mini.nvim": {
       "rev": "8a7cf7e",
       "src": "https://github.com/nvim-mini/mini.nvim"
@@ -45,6 +53,10 @@
     "nvim-web-devicons": {
       "rev": "b8221e4",
       "src": "https://github.com/nvim-tree/nvim-web-devicons"
+    },
+    "onedark.nvim": {
+      "rev": "de495fa",
+      "src": "https://github.com/navarasu/onedark.nvim"
     },
     "plenary.nvim": {
       "rev": "b9fd522",
