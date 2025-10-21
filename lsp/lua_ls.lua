@@ -1,4 +1,5 @@
-require('config.server_manager')('lua-language-server', 'mkdir ~/.lua-language && git clone https://github.com/luals/lua-language-server && cd ~/.lua-language && ./make.sh')
+require('config.server_manager')('lua-language-server',
+  'mkdir ~/.lua-language && git clone https://github.com/luals/lua-language-server && cd ~/.lua-language && ./make.sh')
 
 ---@type vim.lsp.Config
 return {
@@ -17,6 +18,9 @@ return {
         checkThirdParty = false,
         library = {
           vim.env.VIMRUNTIME,
+          "${3rd}/luv/library",
+          "${3rd}/busted/library",
+          vim.fn.stdpath("config"),
         },
       },
     },
