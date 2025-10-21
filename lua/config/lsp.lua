@@ -23,21 +23,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
     local client = vim.lsp.get_client_by_id(ev.data.client_id)
     local bufnr = ev.buf
 
-    vim.keymap.set('n', 'gd', vim.lsp.buf.definition,
-      { buffer = bufnr, silent = true, noremap = true, desc = 'Goto Definition' })
-    vim.keymap.set('n', 'gr', vim.lsp.buf.references,
-      { buffer = bufnr, silent = true, noremap = true, desc = 'Goto References' })
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover,
-      { buffer = bufnr, silent = true, noremap = true, desc = 'Show Documentation' })
-    vim.keymap.set('n', '[d', function() vim.diagnostic.jump({ count = -1 }) end,
-      { buffer = bufnr, silent = true, noremap = true, desc = 'Code Rename' })
-    vim.keymap.set('n', ']d', function() vim.diagnostic.jump({ count = 1 }) end,
-      { buffer = bufnr, silent = true, noremap = true, desc = 'Code Rename' })
-    vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename,
-      { buffer = bufnr, silent = true, noremap = true, desc = 'Code Rename' })
-    vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action,
-      { buffer = bufnr, silent = true, noremap = true, desc = 'Code Action' })
-
     -- Autocomplete nativo
     if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_completion) then
       vim.lsp.completion.enable(true, client.id, bufnr, {

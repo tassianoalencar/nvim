@@ -16,18 +16,3 @@ require('mini.ai').setup()
 require('mini.statusline').setup({
   use_icons = false
 })
-
-require('mini.clue').setup({
-  window = {
-    delay = 200
-  },
-  triggers = {
-    { mode = 'n', keys = '<Leader>' },
-    { mode = 'x', keys = '<Leader>' },
-  },
-  clues = {
-    { mode = 'n', keys = '<Leader>c', desc = '+Code' },
-    { mode = 'n', keys = '<Leader>f', desc = '+Find' },
-    { mode = 'n', keys = '<Leader>u', desc = '+Utils' },
-  },
-})

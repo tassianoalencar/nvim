@@ -18,7 +18,6 @@ keymap('n', '<C-S-Left>', ':vertical resize -5<CR>', { noremap = true, silent = 
 keymap('n', '<C-S-Right>', ':vertical resize +5<CR>', { noremap = true, silent = true })
 
 -- Update and Source
-keymap('n', '<leader>uo', ':update<cr> :source<cr>', { noremap = true, silent = true, desc = 'Update & Source' })
 
 -- Finds
 keymap('n', '<leader>ff', ':Pick files<cr>', { noremap = true, silent = true, desc = 'Find Files' })
@@ -31,4 +30,3 @@ keymap('n', '<S-l>', ':bnext<cr>', { noremap = true, silent = true, desc = 'Next
 keymap('n', '<leader>bd', ':bd<cr>', { noremap = true, silent = true, desc = 'Delete Buffer' })
 
 -- Coder
-keymap('n', '<leader>cf', ':lua vim.lsp.buf.format()<cr>', { desc = 'Code Format', silent = true })
