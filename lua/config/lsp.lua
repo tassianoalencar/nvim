@@ -50,13 +50,13 @@ vim.api.nvim_create_autocmd('LspAttach', {
         end
       end, { buffer = bufnr, expr = true })
 
-      vim.keymap.set('i', '<CR>', function()
-        if vim.fn.pumvisible() == 1 then
-          return '<C-y>'
-        else
-          return '<CR>'
-        end
-      end, { buffer = bufnr, expr = true })
+      -- vim.keymap.set('i', '<CR>', function()
+      --   if vim.fn.pumvisible() == 1 then
+      --     return '<C-y>'
+      --   else
+      --     return '<CR>'
+      --   end
+      -- end, { buffer = bufnr, expr = true })
 
       local typed = ""
 
