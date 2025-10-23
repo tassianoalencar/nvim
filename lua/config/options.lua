@@ -1,5 +1,7 @@
 -- options
 --------------------------------------------------------------------------------
+local teste = "true"
+
 vim.o.laststatus = 3
 vim.o.showmode = false
 vim.o.splitkeep = "screen"

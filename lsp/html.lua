@@ -1,3 +1,5 @@
+require('config.server_manager')('vscode-html-language-server', 'npm i -g vscode-html-languageservice')
+
 ---@type vim.lsp.Config
 return {
   cmd = { "vscode-html-language-server", "--stdio" },

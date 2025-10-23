@@ -1,3 +1,5 @@
+require('config.server_manager')('tailwindcss-language-server', 'npm i -g @tailwindcss/language-server')
+
 ---@type vim.lsp.Config
 return {
   cmd = { "tailwindcss-language-server", "--stdio" },

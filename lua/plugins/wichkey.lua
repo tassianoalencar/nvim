@@ -4,13 +4,9 @@ vim.pack.add({
 
 local wk = require("which-key")
 
----@class wk.Opts
 wk.setup({
   preset = "helix",
-  delay = 100,
-  icons = {
-    mappings = false
-  }
+  delay = 100
 })
 
 wk.add({
@@ -26,3 +22,4 @@ wk.add({
   { "<leader>u",  group = "Ui" },
   { "<leader>uo", "<cmd>update<cr><cmd>source<cr>",    desc = "Update and Source" },
 })
+

@@ -1,3 +1,5 @@
+require('config.server_manager')('tailwindcss-language-server', 'npm i -g @tailwindcss/language-server')
+
 -- Verifica se o tailwindcss-language-server está instalado
 local function ensure_tailwind_lsp()
   local lsp_name = "tailwindcss-language-server"

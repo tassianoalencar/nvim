@@ -1,3 +1,5 @@
+require('config.server_manager')('intelephense', 'npm i -g intelephense')
+
 return {
   cmd = {'intelephense', '--stdio' },
   filetypes = { 'php', 'phtml' },

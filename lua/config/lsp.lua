@@ -1,46 +1,88 @@
-vim.pack.add({
-  { src = "https://github.com/supermaven-inc/supermaven-nvim" }
-})
-
-require("supermaven-nvim").setup({})
+local COMPLETION_TRIGGER_LEN = 2
 
 -- Ativa os LSPs que você quiser
 vim.lsp.enable({ 'lua_ls', 'intelephense', 'html', 'marksman', 'vtsls' })
-vim.api.nvim_create_autocmd("LspAttach", {
+
+-- Diagnósticos visuais
+vim.diagnostic.config({
+  virtual_text = true,
+  underline = false,
+  severity_sort = true,
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = "●",
+      [vim.diagnostic.severity.HINT] = "●",
+      [vim.diagnostic.severity.INFO] = "●",
+      [vim.diagnostic.severity.WARN] = "●",
+    }
+  }
+})
+
+vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(ev)
     local client = vim.lsp.get_client_by_id(ev.data.client_id)
     local bufnr = ev.buf
-    local keymap = vim.keymap.set
 
-    if client ~= nil and client:supports_method("textDocument/completion") then
+    -- Autocomplete nativo
+    if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_completion) then
       vim.lsp.completion.enable(true, client.id, bufnr, {
-        autotrigger = true
+        autotrigger = true,
+        select = false,
       })
 
-      -- vim.lsp.completion.enable(true, ev.data.client_id, ev.buf, {
-      --   convert = function(item)
-      --     local abbr = item.label
-      --     abbr = abbr:gsub("%b()", ""):gsub("%b{}", "")
-      --     abbr = abbr:match("[%w_.]+.*") or abbr
-      --     abbr = #abbr > 15 and abbr:sub(1, 14) .. "…" or abbr
-      --
-      --     local menu = item.detail or ""
-      --     menu = #menu > 15 and menu:sub(1, 14) .. "…" or menu
-      --
-      --     return { abbr = abbr, menu = menu }
-      --   end,
-      -- })
-      --
+      vim.keymap.set('i', '<C-Space>', function()
+        vim.lsp.completion.get()
+      end, { buffer = bufnr })
 
-      keymap("n", "gd", vim.lsp.buf.definition, { buffer = bufnr, desc = "Go to definition" })
-      keymap("n", "K", vim.lsp.buf.hover, { buffer = bufnr, desc = "Hover" })
-      keymap("n", "gD", vim.lsp.buf.implementation, { buffer = bufnr, desc = "Go to implementation" })
-      keymap("n", "gr", vim.lsp.buf.references, { buffer = bufnr, desc = "Find references" })
-      keymap("n", "gi", vim.lsp.buf.implementation, { buffer = bufnr, desc = "Go to implementation" })
-      keymap("n", "<leader>rn", vim.lsp.buf.rename, { buffer = bufnr, desc = "Rename" })
-      keymap("n", "<leader>ca", vim.lsp.buf.code_action, { buffer = bufnr, desc = "Code action" })
-      keymap("n", "<leader>f", vim.lsp.buf.format, { buffer = bufnr, desc = "Format" })
-      keymap("i", "<C-k>", vim.lsp.buf.signature_help, { buffer = bufnr, desc = "Signature help" })
+      vim.keymap.set('i', '<Down>', function()
+        if vim.fn.pumvisible() == 1 then
+          return '<C-n>'
+        else
+          return '<Down>'
+        end
+      end, { buffer = bufnr, expr = true })
+
+      vim.keymap.set('i', '<Up>', function()
+        if vim.fn.pumvisible() == 1 then
+          return '<C-p>'
+        else
+          return '<Up>'
+        end
+      end, { buffer = bufnr, expr = true })
+
+      -- vim.keymap.set('i', '<CR>', function()
+      --   if vim.fn.pumvisible() == 1 then
+      --     return '<C-y>'
+      --   else
+      --     return '<CR>'
+      --   end
+      -- end, { buffer = bufnr, expr = true })
+
+      local typed = ""
+
+      vim.api.nvim_create_autocmd("InsertCharPre", {
+        buffer = bufnr,
+        callback = function()
+          local ch = vim.v.char or ""
+          if ch:match("%w") then
+            typed = typed .. ch
+          else
+            typed = ""
+          end
+
+          if #typed >= COMPLETION_TRIGGER_LEN and vim.fn.pumvisible() ~= 1 then
+            vim.schedule(function()
+              vim.lsp.completion.get()
+            end)
+            typed = ""
+          end
+        end,
+      })
+
+      vim.api.nvim_create_autocmd("InsertLeave", {
+        buffer = bufnr,
+        callback = function() typed = "" end,
+      })
     end
   end,
 })
