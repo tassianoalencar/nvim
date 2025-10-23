@@ -17,16 +17,13 @@ keymap('n', '<C-S-Down>', ':resize -5<CR>', { noremap = true, silent = true })
 keymap('n', '<C-S-Left>', ':vertical resize -5<CR>', { noremap = true, silent = true })
 keymap('n', '<C-S-Right>', ':vertical resize +5<CR>', { noremap = true, silent = true })
 
--- Update and Source
-
 -- Finds
 keymap('n', '<leader>ff', ':Pick files<cr>', { noremap = true, silent = true, desc = 'Find Files' })
 keymap('n', '<leader>fb', ':Pick buffers<cr>', { noremap = true, silent = true, desc = 'Find Buffers' })
 keymap('n', '<leader>fw', ':Pick grep_live<cr>', { noremap = true, silent = true, desc = 'Find Worlds' })
+keymap('n', '<leader>fe', ':Pick diagnostic<cr>', { noremap = true, silent = true, desc = 'Find Errors' })
 
 -- Buffers
 keymap('n', '<S-h>', ':bprev<cr>', { noremap = true, silent = true, desc = 'Previous Buffer' })
 keymap('n', '<S-l>', ':bnext<cr>', { noremap = true, silent = true, desc = 'Next Buffer' })
 keymap('n', '<leader>bd', ':bd<cr>', { noremap = true, silent = true, desc = 'Delete Buffer' })
-
--- Coder

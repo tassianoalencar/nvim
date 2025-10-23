@@ -8,19 +8,3 @@ require('plugins.neotree')
 require('plugins.treesitter')
 require('plugins.theme')
 require('plugins.wichkey')
-
-if true then
-
-  -- Quando dou enter nas chaves
-  -- return {}
-
-  -- Como está ficando
-  -- return {
-  -- "cursor aqui"}
-
-  -- Como deveria ficar
-  -- return {
-  --  "cursoraqui"
-  -- }
-  
-end

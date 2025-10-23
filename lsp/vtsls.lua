@@ -1,5 +1,3 @@
-require('config.server_manager')('vtsls', 'npm install -g @vtsls/language-server')
-
 return {
   cmd = { 'vtsls', '--stdio' },
   root_markers = { 'package.json' },
