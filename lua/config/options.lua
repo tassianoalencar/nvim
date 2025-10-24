@@ -1,7 +1,5 @@
 -- options
 --------------------------------------------------------------------------------
-local teste = "true"
-
 vim.o.laststatus = 3
 vim.o.showmode = false
 vim.o.splitkeep = "screen"
@@ -16,7 +14,6 @@ vim.o.ignorecase = true
 vim.o.smartcase = true
 vim.o.number = true
 vim.o.relativenumber = true
--- vim.o.numberwidth = 6
 vim.o.signcolumn = "yes"
 vim.o.splitbelow = true
 vim.o.splitright = true

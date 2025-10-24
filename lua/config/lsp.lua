@@ -1,22 +1,13 @@
+vim.pack.add({
+  { src = "https://github.com/supermaven-inc/supermaven-nvim" }
+})
+require("supermaven-nvim").setup({})
+
+
 local COMPLETION_TRIGGER_LEN = 2
 
 -- Ativa os LSPs que você quiser
 vim.lsp.enable({ 'lua_ls', 'intelephense', 'html', 'marksman', 'vtsls' })
-
--- Diagnósticos visuais
-vim.diagnostic.config({
-  virtual_text = true,
-  underline = false,
-  severity_sort = true,
-  signs = {
-    text = {
-      [vim.diagnostic.severity.ERROR] = "●",
-      [vim.diagnostic.severity.HINT] = "●",
-      [vim.diagnostic.severity.INFO] = "●",
-      [vim.diagnostic.severity.WARN] = "●",
-    }
-  }
-})
 
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(ev)
