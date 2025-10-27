@@ -5,7 +5,7 @@ vim.pack.add({
   { src = 'https://github.com/chrisgrieser/nvim-various-textobjs' }
 })
 
-local disable_func = function(lang, buf)
+local disable_func = function(_, buf)
   local max_line_width = 500
 
   -- Check first line width
@@ -23,13 +23,16 @@ require("various-textobjs").setup({
 
 require("nvim-treesitter.configs").setup({
   additional_vim_regex_highlighting = false,
-  ensure_installed = { 'lua', 'tsx', 'typescript', 'vimdoc', 'vim', 'regex', 'bash', 'markdown_inline', 'markdown', 'angular', 'html', 'css', 'scss', 'javascript', 'json', 'yaml', 'toml', 'python', 'rust' },
+  ensure_installed = { 'lua', 'tsx', 'typescript', 'vimdoc', 'vim', 'regex', 'bash', 'markdown_inline', 'markdown', 'angular', 'html', 'css', 'scss', 'javascript', 'json', 'yaml', 'toml', 'python' },
   auto_install = true,
   highlight = {
     enable = true,
     disable = disable_func,
   },
-  indent = { enable = true, disable = disable_func },
+  indent = {
+    enable = true,
+    disable = disable_func
+  },
   incremental_selection = {
     enable = true,
     keymaps = {

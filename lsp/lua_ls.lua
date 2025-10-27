@@ -1,27 +1,32 @@
-require('config.server_manager')('lua-language-server',
-  'mkdir ~/.lua-language && git clone https://github.com/luals/lua-language-server && cd ~/.lua-language && ./make.sh')
-
 ---@type vim.lsp.Config
 return {
-  cmd = { 'lua-language-server' },
+  cmd = { "lua-language-server" },
   filetypes = { 'lua' },
-  root_markers = { '.luarc.json', '.luarc.jsonc' },
+  root_markers = {
+    "stylua.toml",
+    "selene.toml",
+    "selene.yml",
+    ".luarc.json",
+    ".luarc.jsonc",
+    ".luacheckrc",
+    ".stylua.toml",
+    ".git",
+  },
   settings = {
     Lua = {
-      hint = {
-        enable = true
-      },
       runtime = {
         version = "LuaJIT",
       },
+      completion = {
+        enable = true,
+      },
+      diagnostics = {
+        enable = true,
+        globals = { "vim" },
+      },
       workspace = {
+        library = { vim.env.VIMRUNTIME },
         checkThirdParty = false,
-        library = {
-          vim.env.VIMRUNTIME,
-          "${3rd}/luv/library",
-          "${3rd}/busted/library",
-          vim.fn.stdpath("config"),
-        },
       },
     },
   },

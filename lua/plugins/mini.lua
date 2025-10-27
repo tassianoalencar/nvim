@@ -12,6 +12,7 @@ require("mini.tabline").setup()
 require("mini.tabline").setup()
 require("mini.indentscope").setup()
 require("mini.ai").setup()
+require("mini.extra").setup()
 
 require("mini.statusline").setup({
   use_icons = false

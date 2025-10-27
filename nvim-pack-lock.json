@@ -62,6 +62,7 @@
       "rev": "de495fa",
       "src": "https://github.com/navarasu/onedark.nvim"
     },
+    "onedarkpro.nvim": [],
     "plenary.nvim": {
       "rev": "b9fd522",
       "src": "https://github.com/nvim-lua/plenary.nvim"
@@ -69,6 +70,10 @@
     "supermaven-nvim": {
       "rev": "07d20fc",
       "src": "https://github.com/supermaven-inc/supermaven-nvim"
+    },
+    "tokyodark.nvim": {
+      "rev": "cc70a2f",
+      "src": "https://github.com/tiagovla/tokyodark.nvim"
     },
     "tokyonight.nvim": {
       "rev": "d14614c",

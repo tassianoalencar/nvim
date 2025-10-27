@@ -1,30 +1,34 @@
 -- options
 --------------------------------------------------------------------------------
-vim.o.laststatus = 3
-vim.o.showmode = false
-vim.o.splitkeep = "screen"
-vim.o.clipboard = "unnamedplus"
-vim.o.cursorline = true
-vim.o.expandtab = true
-vim.o.shiftwidth = 2
-vim.o.smartindent = true
-vim.o.tabstop = 2
-vim.o.softtabstop = 2
-vim.o.ignorecase = true
-vim.o.smartcase = true
-vim.o.number = true
-vim.o.relativenumber = true
-vim.o.signcolumn = "yes"
-vim.o.splitbelow = true
-vim.o.splitright = true
-vim.o.timeoutlen = 400
-vim.o.undofile = true
-vim.o.updatetime = 250
+vim.opt.laststatus = 3
+vim.opt.showmode = false
+vim.opt.splitkeep = "screen"
+vim.opt.cursorline = true
+vim.opt.expandtab = true
+vim.opt.shiftwidth = 2
+vim.opt.smartindent = true
+vim.opt.tabstop = 2
+vim.opt.softtabstop = 2
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.signcolumn = "yes"
+vim.opt.splitbelow = true
+vim.opt.splitright = true
+vim.opt.timeoutlen = 400
+vim.opt.undofile = true
+vim.opt.updatetime = 250
 vim.opt.fillchars = { eob = " " }
-vim.opt.pumblend = 10
-vim.opt.pumheight = 10
 vim.opt.completeopt = { "menu", "menuone", "noinsert", "popup" }
 vim.opt.shortmess:append("c")
+vim.opt.pumborder = "single"
+vim.opt.pumblend = 10
+vim.opt.pumheight = 10
+
+vim.schedule(function()
+  vim.o.clipboard = "unnamedplus"
+end)
 
 -- Fold
 vim.opt.foldmethod = "expr"
