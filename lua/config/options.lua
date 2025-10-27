@@ -22,7 +22,7 @@ vim.opt.updatetime = 250
 vim.opt.fillchars = { eob = " " }
 vim.opt.completeopt = { "menu", "menuone", "noinsert", "popup" }
 vim.opt.shortmess:append("c")
-vim.opt.pumborder = "single"
+vim.opt.pumborder = "double"
 vim.opt.pumblend = 10
 vim.opt.pumheight = 10
 
