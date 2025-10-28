@@ -17,8 +17,6 @@ keymap('n', '<C-S-Down>', ':resize -5<CR>', { noremap = true, silent = true })
 keymap('n', '<C-S-Left>', ':vertical resize -5<CR>', { noremap = true, silent = true })
 keymap('n', '<C-S-Right>', ':vertical resize +5<CR>', { noremap = true, silent = true })
 
--- Update and Source
-
 -- Finds
 keymap('n', '<leader>ff', ':Pick files<cr>', { noremap = true, silent = true, desc = 'Find Files' })
 keymap('n', '<leader>fb', ':Pick buffers<cr>', { noremap = true, silent = true, desc = 'Find Buffers' })
@@ -29,4 +27,4 @@ keymap('n', '<S-h>', ':bprev<cr>', { noremap = true, silent = true, desc = 'Prev
 keymap('n', '<S-l>', ':bnext<cr>', { noremap = true, silent = true, desc = 'Next Buffer' })
 keymap('n', '<leader>bd', ':bd<cr>', { noremap = true, silent = true, desc = 'Delete Buffer' })
 
--- Coder
+keymap('n', '<Esc>', ':noh<cr>', { noremap = true, silent = true, desc = 'Clear Highlight' })

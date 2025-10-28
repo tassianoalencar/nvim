@@ -8,4 +8,4 @@ vim.pack.add({
 require('neo-tree').setup({})
 
 -- Keymaps
-vim.keymap.set('n', '<leader>e', ':Neotree toggle<cr>', { desc = 'File Explorer' })
+vim.keymap.set('n', '<leader>e', ':Neotree toggle<cr>', { silent = true, desc = 'File Explorer' })
