@@ -5,12 +5,6 @@ vim.g.maplocalleader = ' '
 
 local keymap = vim.keymap.set
 
--- Move arround windows
-keymap('n', '<C-h>', '<C-w>h', { noremap = true, silent = true })
-keymap('n', '<C-j>', '<C-w>j', { noremap = true, silent = true })
-keymap('n', '<C-k>', '<C-w>k', { noremap = true, silent = true })
-keymap('n', '<C-l>', '<C-w>l', { noremap = true, silent = true })
-
 -- Increase and decrease window size vertically and horizontally
 keymap('n', '<C-S-Up>', ':resize +5<CR>', { noremap = true, silent = true })
 keymap('n', '<C-S-Down>', ':resize -5<CR>', { noremap = true, silent = true })
@@ -28,3 +22,8 @@ keymap('n', '<S-l>', ':bnext<cr>', { noremap = true, silent = true, desc = 'Next
 keymap('n', '<leader>bd', ':bd<cr>', { noremap = true, silent = true, desc = 'Delete Buffer' })
 
 keymap('n', '<Esc>', ':noh<cr>', { noremap = true, silent = true, desc = 'Clear Highlight' })
+
+keymap('n', '<leader>ssp', ':lua MiniSessions.write("maguh")<cr>', { noremap = true, silent = true, desc = "Save Session to Personal" })
+keymap('n', '<leader>srp', ':lua MiniSessions.read("maguh")<cr>', { noremap = true, silent = true, desc = "Restore Session to Personal" })
+keymap('n', '<leader>ssi', ':lua MiniSessions.write("informata")<cr>', { noremap = true, silent = true, desc = "Save Session to Informata" })
+keymap('n', '<leader>sri', ':lua MiniSessions.read("informata")<cr>', { noremap = true, silent = true, desc = "Restore Session to Informata" })
