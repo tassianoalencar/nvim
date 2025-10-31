@@ -7,9 +7,9 @@ vim.opt.fillchars = { eob = " " }
 vim.opt.ignorecase = true
 vim.opt.laststatus = 3
 vim.opt.number = true
--- vim.opt.pumblend = 10
--- vim.opt.pumborder = "double"
--- vim.opt.pumheight = 10
+vim.opt.pumblend = 10
+vim.opt.pumborder = "double"
+vim.opt.pumheight = 10
 vim.opt.relativenumber = true
 vim.opt.shiftwidth = 2
 vim.opt.shortmess:append("c")

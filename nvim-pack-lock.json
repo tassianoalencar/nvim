@@ -41,6 +41,14 @@
       "rev": "7a2c97c",
       "src": "https://github.com/windwp/nvim-autopairs"
     },
+    "nvim-java": {
+      "rev": "3d56b74",
+      "src": "https://github.com/nvim-java/nvim-java"
+    },
+    "nvim-jdtls": {
+      "rev": "380ac14",
+      "src": "https://github.com/mfussenegger/nvim-jdtls"
+    },
     "nvim-notify": {
       "rev": "8701bec",
       "src": "https://github.com/rcarriga/nvim-notify"

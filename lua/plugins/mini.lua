@@ -15,10 +15,6 @@ require("mini.statusline").setup()
 require("mini.comment").setup()
 require("mini.sessions").setup()
 
-require("mini.completion").setup({
-  delay = { completion = 0, info = 0, signature = 0 },
-})
-
 require("mini.indentscope").setup({
   symbol = '|',
 })
