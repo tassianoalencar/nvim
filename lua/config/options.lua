@@ -1,6 +1,6 @@
 -- options
 --------------------------------------------------------------------------------
-vim.opt.completeopt = { "menu", "menuone", "noinsert", "popup" }
+vim.opt.completeopt = {"fuzzy", "menu", "menuone", "noinsert", "popup" }
 vim.opt.cursorline = true
 vim.opt.expandtab = true
 vim.opt.fillchars = { eob = " " }
@@ -8,7 +8,7 @@ vim.opt.ignorecase = true
 vim.opt.laststatus = 3
 vim.opt.number = true
 vim.opt.pumblend = 10
-vim.opt.pumborder = "double"
+vim.opt.pumborder = "rounded"
 vim.opt.pumheight = 10
 vim.opt.relativenumber = true
 vim.opt.shiftwidth = 2
@@ -36,4 +36,3 @@ vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.opt.foldlevel = 99
 vim.opt.foldlevelstart = 99
 vim.opt.foldminlines = 1
-

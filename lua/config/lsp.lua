@@ -1,12 +1,5 @@
-vim.pack.add({
-  { src = "https://github.com/folke/noice.nvim" },
-})
-
-require("noice").setup()
-
 local COMPLETION_TRIGGER_LEN = 2
 
--- Ativa os LSPs que você quiser
 vim.lsp.enable({ "lua_ls", "intelephense", "html", "marksman", "tailwindcss", "vtsls", "jdtls" })
 
 vim.diagnostic.config({
@@ -21,17 +14,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.lsp.commands["java.apply.workspaceEdit"] = function(command, ctx)
       local edit = command.arguments[1]
       if edit then
-        vim.lsp.util.apply_workspace_edit(edit, "utf-8")
+        vim.lsp.util.apply_workspace_edit(ctx, "utf-8")
       end
     end
 
-    -- Autocomplete nativo
     if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_completion) then
       local typed = ""
-
-      vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { buffer = bufnr, desc = 'Go to definition' })
-      vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = bufnr, desc = 'Hover', silent = true })
-      vim.keymap.set('n', '<leader>cf', vim.lsp.buf.format, { buffer = bufnr, desc = 'Code Format' })
 
       vim.lsp.completion.enable(true, client.id, bufnr, {
         autotrigger = true,

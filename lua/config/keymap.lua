@@ -27,3 +27,15 @@ keymap('n', '<leader>ssp', ':lua MiniSessions.write("maguh")<cr>', { noremap = t
 keymap('n', '<leader>srp', ':lua MiniSessions.read("maguh")<cr>', { noremap = true, silent = true, desc = "Restore Session to Personal" })
 keymap('n', '<leader>ssi', ':lua MiniSessions.write("informata")<cr>', { noremap = true, silent = true, desc = "Save Session to Informata" })
 keymap('n', '<leader>sri', ':lua MiniSessions.read("informata")<cr>', { noremap = true, silent = true, desc = "Restore Session to Informata" })
+
+-- Lsp keymaps
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(ev)
+    local bufnr = ev.buf
+
+    keymap('n', 'gd', vim.lsp.buf.definition, { buffer = bufnr, desc = 'Go to definition' })
+    keymap('n', 'K', vim.lsp.buf.hover, { buffer = bufnr, desc = 'Hover', silent = true })
+    keymap('n', '<leader>cf', vim.lsp.buf.format, { buffer = bufnr, desc = 'Code Format' })
+    keymap('i', '<C-Space>', vim.lsp.completion.get)
+  end
+})
