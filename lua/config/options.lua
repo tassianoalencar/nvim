@@ -25,6 +25,7 @@ vim.opt.tabstop = 2
 vim.opt.timeoutlen = 400
 vim.opt.undofile = true
 vim.opt.updatetime = 250
+vim.o.swapfile = false
 
 vim.schedule(function()
   vim.o.clipboard = "unnamedplus"
