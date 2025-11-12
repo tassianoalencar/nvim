@@ -1,107 +1,22 @@
 {
   "plugins": {
-    "astrotheme": {
-      "rev": "4a2af93",
-      "src": "https://github.com/AstroNvim/astrotheme"
-    },
-    "base16-nvim": {
-      "rev": "dc28874",
-      "src": "https://github.com/wincent/base16-nvim"
-    },
-    "git-conflict.nvim": {
-      "rev": "a1badcd",
-      "src": "https://github.com/akinsho/git-conflict.nvim"
-    },
-    "github-nvim-theme": {
-      "rev": "c106c94",
-      "src": "https://github.com/projekt0n/github-nvim-theme"
-    },
-    "kanagawa.nvim": {
-      "rev": "aef7f5c",
-      "src": "https://github.com/rebelot/kanagawa.nvim"
-    },
-    "mini.nvim": {
-      "rev": "8a7cf7e",
-      "src": "https://github.com/nvim-mini/mini.nvim"
-    },
+    "git-conflict.nvim": [],
+    "mini.nvim": [],
     "neo-tree.nvim": {
-      "rev": "c4c168e",
-      "src": "https://github.com/nvim-neo-tree/neo-tree.nvim",
       "version": "3.0.0 - 4.0.0"
     },
-    "noice.nvim": {
-      "rev": "d14d02c",
-      "src": "https://github.com/folke/noice.nvim"
-    },
-    "nui.nvim": {
-      "rev": "de74099",
-      "src": "https://github.com/MunifTanjim/nui.nvim"
-    },
-    "nvim-autopairs": {
-      "rev": "7a2c97c",
-      "src": "https://github.com/windwp/nvim-autopairs"
-    },
-    "nvim-java": {
-      "rev": "3d56b74",
-      "src": "https://github.com/nvim-java/nvim-java"
-    },
-    "nvim-jdtls": {
-      "rev": "380ac14",
-      "src": "https://github.com/mfussenegger/nvim-jdtls"
-    },
-    "nvim-notify": {
-      "rev": "8701bec",
-      "src": "https://github.com/rcarriga/nvim-notify"
-    },
+    "nui.nvim": [],
+    "nvim-autopairs": [],
     "nvim-treesitter": {
-      "rev": "42fc28ba",
-      "src": "https://github.com/nvim-treesitter/nvim-treesitter",
       "version": "'master'"
     },
-    "nvim-treesitter-textobjects": {
-      "rev": "71385f1",
-      "src": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects"
-    },
-    "nvim-ts-context-commentstring": {
-      "rev": "1b212c2",
-      "src": "https://github.com/JoosepAlviste/nvim-ts-context-commentstring"
-    },
-    "nvim-various-textobjs": {
-      "rev": "aede158",
-      "src": "https://github.com/chrisgrieser/nvim-various-textobjs"
-    },
-    "nvim-web-devicons": {
-      "rev": "b8221e4",
-      "src": "https://github.com/nvim-tree/nvim-web-devicons"
-    },
-    "onedark.nvim": {
-      "rev": "de495fa",
-      "src": "https://github.com/navarasu/onedark.nvim"
-    },
-    "onedarkpro.nvim": [],
-    "plenary.nvim": {
-      "rev": "b9fd522",
-      "src": "https://github.com/nvim-lua/plenary.nvim"
-    },
-    "supermaven-nvim": {
-      "rev": "07d20fc",
-      "src": "https://github.com/supermaven-inc/supermaven-nvim"
-    },
-    "tokyodark.nvim": {
-      "rev": "cc70a2f",
-      "src": "https://github.com/tiagovla/tokyodark.nvim"
-    },
-    "tokyonight.nvim": {
-      "rev": "d14614c",
-      "src": "https://github.com/folke/tokyonight.nvim"
-    },
-    "vim-fugitive": {
-      "rev": "61b51c0",
-      "src": "https://github.com/tpope/vim-fugitive"
-    },
-    "which-key.nvim": {
-      "rev": "b4177e3",
-      "src": "https://github.com/folke/which-key.nvim"
-    }
+    "nvim-treesitter-textobjects": [],
+    "nvim-ts-context-commentstring": [],
+    "nvim-various-textobjs": [],
+    "nvim-web-devicons": [],
+    "plenary.nvim": [],
+    "tokyodark.nvim": [],
+    "vim-fugitive": [],
+    "which-key.nvim": []
   }
 }
