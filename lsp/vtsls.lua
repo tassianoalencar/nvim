@@ -1,6 +1,7 @@
 return {
   cmd = { 'vtsls', '--stdio' },
   root_markers = { 'package.json' },
+  filetypes = { 'javascript', 'typescript' },
   settings = {
     typescript = {
       updateImportsOnFileMove = { enabled = 'always' },

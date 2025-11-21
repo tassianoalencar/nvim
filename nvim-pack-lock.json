@@ -1,22 +1,64 @@
 {
   "plugins": {
-    "git-conflict.nvim": [],
-    "mini.nvim": [],
+    "git-conflict.nvim": {
+      "rev": "a1badcd",
+      "src": "https://github.com/akinsho/git-conflict.nvim"
+    },
+    "mini.nvim": {
+      "rev": "f43357b",
+      "src": "https://github.com/nvim-mini/mini.nvim"
+    },
     "neo-tree.nvim": {
       "version": "3.0.0 - 4.0.0"
     },
-    "nui.nvim": [],
-    "nvim-autopairs": [],
+    "nui.nvim": {
+      "rev": "de74099",
+      "src": "https://github.com/MunifTanjim/nui.nvim"
+    },
+    "nvim-autopairs": {
+      "rev": "7a2c97c",
+      "src": "https://github.com/windwp/nvim-autopairs"
+    },
     "nvim-treesitter": {
+      "rev": "42fc28ba",
+      "src": "https://github.com/nvim-treesitter/nvim-treesitter",
       "version": "'master'"
     },
-    "nvim-treesitter-textobjects": [],
-    "nvim-ts-context-commentstring": [],
-    "nvim-various-textobjs": [],
-    "nvim-web-devicons": [],
-    "plenary.nvim": [],
-    "tokyodark.nvim": [],
-    "vim-fugitive": [],
-    "which-key.nvim": []
+    "nvim-treesitter-textobjects": {
+      "rev": "5ca4aaa",
+      "src": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects"
+    },
+    "nvim-ts-context-commentstring": {
+      "rev": "1b212c2",
+      "src": "https://github.com/JoosepAlviste/nvim-ts-context-commentstring"
+    },
+    "nvim-various-textobjs": {
+      "rev": "aede158",
+      "src": "https://github.com/chrisgrieser/nvim-various-textobjs"
+    },
+    "nvim-web-devicons": {
+      "rev": "8dcb311",
+      "src": "https://github.com/nvim-tree/nvim-web-devicons"
+    },
+    "plenary.nvim": {
+      "rev": "b9fd522",
+      "src": "https://github.com/nvim-lua/plenary.nvim"
+    },
+    "snacks.nvim": {
+      "rev": "dec29f5",
+      "src": "https://github.com/folke/snacks.nvim"
+    },
+    "tokyodark.nvim": {
+      "rev": "cc70a2f",
+      "src": "https://github.com/tiagovla/tokyodark.nvim"
+    },
+    "vim-fugitive": {
+      "rev": "61b51c0",
+      "src": "https://github.com/tpope/vim-fugitive"
+    },
+    "which-key.nvim": {
+      "rev": "3aab214",
+      "src": "https://github.com/folke/which-key.nvim"
+    }
   }
 }

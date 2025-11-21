@@ -5,16 +5,16 @@ vim.pack.add({
   { src = 'https://github.com/akinsho/git-conflict.nvim' },
   { src = 'https://github.com/tiagovla/tokyodark.nvim' },
   { src = 'https://github.com/folke/which-key.nvim' },
-  { src = 'https://github.com/nvim-mini/mini.nvim' },
   { src = 'https://github.com/windwp/nvim-autopairs' },
-  { src = 'https://github.com/nvim-neo-tree/neo-tree.nvim',                version = vim.version.range('3') },
   { src = 'https://github.com/nvim-lua/plenary.nvim' },
   { src = 'https://github.com/MunifTanjim/nui.nvim' },
   { src = 'https://github.com/nvim-tree/nvim-web-devicons' },
   { src = 'https://github.com/nvim-treesitter/nvim-treesitter',            version = "master" },
   { src = 'https://github.com/nvim-treesitter/nvim-treesitter-textobjects' },
   { src = 'https://github.com/JoosepAlviste/nvim-ts-context-commentstring' },
-  { src = 'https://github.com/chrisgrieser/nvim-various-textobjs' }
+  { src = 'https://github.com/chrisgrieser/nvim-various-textobjs' },
+  { src = 'https://github.com/folke/snacks.nvim' },
+  { src = 'https://github.com/nvim-mini/mini.nvim' },
 })
 
 -- options
@@ -52,21 +52,19 @@ vim.opt.foldlevel = 99
 vim.opt.foldlevelstart = 99
 vim.opt.foldminlines = 1
 vim.o.swapfile = false
+vim.o.cmdheight = 0
+vim.o.wrap = false
 
 vim.schedule(function()
   vim.o.clipboard = 'unnamedplus'
 end)
 
--- keymap
+-- general keymap
 --------------------------------------------------------------------------------
 vim.keymap.set('n', '<C-S-Up>', ':resize +5<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<C-S-Down>', ':resize -5<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<C-S-Left>', ':vertical resize -5<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<C-S-Right>', ':vertical resize +5<CR>', { noremap = true, silent = true })
-vim.keymap.set('n', '<leader>ff', ':Pick files<cr>', { noremap = true, silent = true, desc = 'Find Files' })
-vim.keymap.set('n', '<leader>fb', ':Pick buffers<cr>', { noremap = true, silent = true, desc = 'Find Buffers' })
-vim.keymap.set('n', '<leader>fw', ':Pick grep_live<cr>', { noremap = true, silent = true, desc = 'Find Worlds' })
-vim.keymap.set('n', '<leader>fo', ':Pick oldfiles<cr>', { noremap = true, silent = true, desc = 'Find Worlds' })
 vim.keymap.set('n', '<S-h>', ':bprev<cr>', { noremap = true, silent = true, desc = 'Previous Buffer' })
 vim.keymap.set('n', '<S-l>', ':bnext<cr>', { noremap = true, silent = true, desc = 'Next Buffer' })
 vim.keymap.set('n', '<leader>bd', ':bd<cr>', { noremap = true, silent = true, desc = 'Delete Buffer' })
@@ -83,7 +81,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end
 })
 
-vim.lsp.enable({ "lua_ls", "intelephense", "html", "marksman", "tailwindcss", "vtsls", "jdtls" })
+vim.lsp.enable({ "lua_ls", "intelephense", "html", "marksman", "tailwindcss", "vtsls", "jdtls", "rust_analyzer" })
 
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(ev)
@@ -124,8 +122,20 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end
   end,
 })
+vim.diagnostic.config({
+  underline = true,    -- Underline diagnostics
+  signs = true,        -- Show signs in the gutter
+  virtual_text = true, -- Display virtual text inline
+  float = {            -- Options for floating windows
+    border = 'rounded',
+    source = 'always',
+  },
+  update_in_insert = false, -- Don't update in Insert mode
+  severity_sort = true,     -- Sort diagnostics by severity
+})
 
 -- autocmd
+--
 --------------------------------------------------------------------------------
 local autocmd = vim.api.nvim_create_autocmd
 local augroup = vim.api.nvim_create_augroup
@@ -147,27 +157,7 @@ vim.keymap.set('n', '<leader>gcN', '<Plug>(git-conflict-none)', { silent = true,
 vim.keymap.set('n', '<leader>gcn', '<Plug>(git-conflict-prev-conflict)', { silent = true, desc = 'Git Conflict Next' })
 vim.keymap.set('n', '<leader>gcp', '<Plug>(git-conflict-next-conflict)', { silent = true, desc = 'Git Conflict Prev' })
 
--- mini plugins
---------------------------------------------------------------------------------
-require('mini.notify').setup()
-require("mini.pick").setup()
-require("mini.surround").setup()
-require("mini.tabline").setup()
-require("mini.tabline").setup()
-require("mini.ai").setup()
-require("mini.extra").setup()
-require("mini.statusline").setup()
-require("mini.comment").setup()
-require("mini.sessions").setup()
-require("mini.indentscope").setup({
-  symbol = '|',
-})
-
 require("nvim-autopairs").setup({})
-require('neo-tree').setup({})
-
--- Keymaps
-vim.keymap.set('n', '<leader>e', ':Neotree toggle<cr>', { silent = true, desc = 'File Explorer' })
 
 require("various-textobjs").setup({
   keymaps = {
@@ -285,3 +275,25 @@ wk.add({
   { "<leader>u",  group = "Ui" },
   { "<leader>uo", "<cmd>update<cr><cmd>source<cr>", desc = "Update and Source" },
 })
+
+-- mini
+--------------------------------------------------------------------------------
+require('mini.tabline').setup()
+
+-- snacks
+--------------------------------------------------------------------------------
+require('snacks').setup({
+  indent = { enabled = true },
+  explorer = { enabled = true },
+  picker = { enabled = true },
+  input = { enabled = true },
+  dim = { enabled = true },
+  notifier = {
+    enabled = true,
+    timeout = 3000,
+  },
+})
+
+vim.keymap.set('n', '<leader>ff', function() Snacks.picker.files() end, { desc = 'Find Files' })
+vim.keymap.set('n', '<leader>fw', function() Snacks.picker.grep() end, { desc = 'Find Files' })
+vim.keymap.set('n', '<leader>e', function() Snacks.explorer() end, { desc = 'Find Files' })
