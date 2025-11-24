@@ -54,6 +54,7 @@ vim.opt.foldminlines = 1
 vim.o.swapfile = false
 vim.o.cmdheight = 0
 vim.o.wrap = false
+vim.o.scrolloff = 1
 
 vim.schedule(function()
   vim.o.clipboard = 'unnamedplus'
@@ -69,17 +70,6 @@ vim.keymap.set('n', '<S-h>', ':bprev<cr>', { noremap = true, silent = true, desc
 vim.keymap.set('n', '<S-l>', ':bnext<cr>', { noremap = true, silent = true, desc = 'Next Buffer' })
 vim.keymap.set('n', '<leader>bd', ':bd<cr>', { noremap = true, silent = true, desc = 'Delete Buffer' })
 vim.keymap.set('n', '<Esc>', ':noh<cr>', { noremap = true, silent = true, desc = 'Clear Highlight' })
-
-vim.api.nvim_create_autocmd('LspAttach', {
-  callback = function(ev)
-    local bufnr = ev.buf
-
-    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { buffer = bufnr, desc = 'Go to definition' })
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = bufnr, desc = 'Hover', silent = true })
-    vim.keymap.set('n', '<leader>cf', vim.lsp.buf.format, { buffer = bufnr, desc = 'Code Format' })
-    vim.keymap.set('i', '<C-Space>', vim.lsp.completion.get)
-  end
-})
 
 vim.lsp.enable({ "lua_ls", "intelephense", "html", "marksman", "tailwindcss", "vtsls", "jdtls", "rust_analyzer" })
 
@@ -120,18 +110,18 @@ vim.api.nvim_create_autocmd('LspAttach', {
         callback = function() typed = "" end,
       })
     end
+
+    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { buffer = bufnr, desc = 'Go to definition' })
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = bufnr, desc = 'Hover', silent = true })
+    vim.keymap.set('n', '<leader>cf', vim.lsp.buf.format, { buffer = bufnr, desc = 'Code Format' })
+    vim.keymap.set('i', '<C-Space>', vim.lsp.completion.get)
   end,
 })
+
 vim.diagnostic.config({
-  underline = true,    -- Underline diagnostics
-  signs = true,        -- Show signs in the gutter
-  virtual_text = true, -- Display virtual text inline
-  float = {            -- Options for floating windows
-    border = 'rounded',
-    source = 'always',
-  },
-  update_in_insert = false, -- Don't update in Insert mode
-  severity_sort = true,     -- Sort diagnostics by severity
+  underline = false,
+  virtual_text = true,
+  severity_sort = true,
 })
 
 -- autocmd
