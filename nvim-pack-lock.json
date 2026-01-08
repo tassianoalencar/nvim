@@ -8,9 +8,6 @@
       "rev": "f43357b",
       "src": "https://github.com/nvim-mini/mini.nvim"
     },
-    "neo-tree.nvim": {
-      "version": "3.0.0 - 4.0.0"
-    },
     "nui.nvim": {
       "rev": "de74099",
       "src": "https://github.com/MunifTanjim/nui.nvim"

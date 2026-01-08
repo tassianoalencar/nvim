@@ -234,7 +234,7 @@ vim.api.nvim_create_autocmd('PackChanged', {
 vim.cmd 'doautocmd User TreesitterLoaded'
 
 require("tokyodark").setup({
-  transparent_background = false,     -- set background to transparent
+  transparent_background = true,     -- set background to transparent
   gamma = 1,                          -- adjust the brightness of the theme
   styles = {
     comments = { italic = false },    -- style for comments
