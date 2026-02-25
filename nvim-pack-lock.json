@@ -5,7 +5,7 @@
       "src": "https://github.com/akinsho/git-conflict.nvim"
     },
     "mini.nvim": {
-      "rev": "f43357b",
+      "rev": "c163117900c17d4abf30bc09452a261c8536060c",
       "src": "https://github.com/nvim-mini/mini.nvim"
     },
     "nui.nvim": {
@@ -13,7 +13,7 @@
       "src": "https://github.com/MunifTanjim/nui.nvim"
     },
     "nvim-autopairs": {
-      "rev": "7a2c97c",
+      "rev": "c2a0dd0d931d0fb07665e1fedb1ea688da3b80b4",
       "src": "https://github.com/windwp/nvim-autopairs"
     },
     "nvim-treesitter": {
@@ -30,11 +30,11 @@
       "src": "https://github.com/JoosepAlviste/nvim-ts-context-commentstring"
     },
     "nvim-various-textobjs": {
-      "rev": "aede158",
+      "rev": "71bd98e08e96a730a60566f929a6ac3974ede0e0",
       "src": "https://github.com/chrisgrieser/nvim-various-textobjs"
     },
     "nvim-web-devicons": {
-      "rev": "8dcb311",
+      "rev": "803353450c374192393f5387b6a0176d0972b848",
       "src": "https://github.com/nvim-tree/nvim-web-devicons"
     },
     "plenary.nvim": {
@@ -42,12 +42,16 @@
       "src": "https://github.com/nvim-lua/plenary.nvim"
     },
     "snacks.nvim": {
-      "rev": "dec29f5",
+      "rev": "fe7cfe9800a182274d0f868a74b7263b8c0c020b",
       "src": "https://github.com/folke/snacks.nvim"
     },
     "tokyodark.nvim": {
-      "rev": "cc70a2f",
+      "rev": "659aff3c73dc2e0159314050a81671f0b2eaad01",
       "src": "https://github.com/tiagovla/tokyodark.nvim"
+    },
+    "tokyonight.nvim": {
+      "rev": "5da1b76e64daf4c5d410f06bcb6b9cb640da7dfd",
+      "src": "https://github.com/folke/tokyonight.nvim"
     },
     "vim-fugitive": {
       "rev": "61b51c0",

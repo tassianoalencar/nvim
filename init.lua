@@ -3,7 +3,6 @@
 vim.pack.add({
   { src = 'https://github.com/tpope/vim-fugitive' },
   { src = 'https://github.com/akinsho/git-conflict.nvim' },
-  { src = 'https://github.com/tiagovla/tokyodark.nvim' },
   { src = 'https://github.com/folke/which-key.nvim' },
   { src = 'https://github.com/windwp/nvim-autopairs' },
   { src = 'https://github.com/nvim-lua/plenary.nvim' },
@@ -15,6 +14,7 @@ vim.pack.add({
   { src = 'https://github.com/chrisgrieser/nvim-various-textobjs' },
   { src = 'https://github.com/folke/snacks.nvim' },
   { src = 'https://github.com/nvim-mini/mini.nvim' },
+  { src = 'https://github.com/folke/tokyonight.nvim' }
 })
 
 -- options
@@ -233,19 +233,8 @@ vim.api.nvim_create_autocmd('PackChanged', {
 
 vim.cmd 'doautocmd User TreesitterLoaded'
 
-require("tokyodark").setup({
-  transparent_background = true,     -- set background to transparent
-  gamma = 1,                          -- adjust the brightness of the theme
-  styles = {
-    comments = { italic = false },    -- style for comments
-    keywords = { italic = false },    -- style for keywords
-    identifiers = { italic = false }, -- style for identifiers
-    functions = {},                   -- style for functions
-    variables = {},                   -- style for variables
-  },
-})
+vim.cmd[[colorscheme tokyonight-night]]
 
-vim.cmd("colorscheme tokyodark")
 
 -- which-key
 --------------------------------------------------------------------------------
@@ -287,3 +276,4 @@ require('snacks').setup({
 vim.keymap.set('n', '<leader>ff', function() Snacks.picker.files() end, { desc = 'Find Files' })
 vim.keymap.set('n', '<leader>fw', function() Snacks.picker.grep() end, { desc = 'Find Files' })
 vim.keymap.set('n', '<leader>e', function() Snacks.explorer() end, { desc = 'Find Files' })
+
