@@ -8,13 +8,13 @@ vim.pack.add({
   { src = 'https://github.com/nvim-lua/plenary.nvim' },
   { src = 'https://github.com/MunifTanjim/nui.nvim' },
   { src = 'https://github.com/nvim-tree/nvim-web-devicons' },
-  { src = 'https://github.com/nvim-treesitter/nvim-treesitter',            version = "master" },
+  { src = 'https://github.com/nvim-treesitter/nvim-treesitter',            version = "main" },
   { src = 'https://github.com/nvim-treesitter/nvim-treesitter-textobjects' },
   { src = 'https://github.com/JoosepAlviste/nvim-ts-context-commentstring' },
   { src = 'https://github.com/chrisgrieser/nvim-various-textobjs' },
   { src = 'https://github.com/folke/snacks.nvim' },
   { src = 'https://github.com/nvim-mini/mini.nvim' },
-  { src = 'https://github.com/folke/tokyonight.nvim' }
+  { src = 'https://github.com/tiagovla/tokyodark.nvim' }
 })
 
 -- options
@@ -233,7 +233,19 @@ vim.api.nvim_create_autocmd('PackChanged', {
 
 vim.cmd 'doautocmd User TreesitterLoaded'
 
-vim.cmd[[colorscheme tokyonight-night]]
+-- Coloscheme
+--------------------------------------------------------------------------------
+require('tokyodark').setup({
+  transparent_background = true,                                          -- set background to transparent
+  styles = {
+    comments = {},                                          -- style for comments
+    keywords = {},                                          -- style for keywords
+    identifiers = {},                                       -- style for identifiers
+    functions = {},                                                        -- style for functions
+    variables = {},                                                        -- style for variables
+  },
+})
+vim.cmd.colorscheme('tokyodark')
 
 
 -- which-key
@@ -241,7 +253,7 @@ vim.cmd[[colorscheme tokyonight-night]]
 local wk = require("which-key")
 
 wk.setup({
-  preset = "helix",
+  -- preset = "helix",
   delay = 0
 })
 
@@ -276,4 +288,3 @@ require('snacks').setup({
 vim.keymap.set('n', '<leader>ff', function() Snacks.picker.files() end, { desc = 'Find Files' })
 vim.keymap.set('n', '<leader>fw', function() Snacks.picker.grep() end, { desc = 'Find Files' })
 vim.keymap.set('n', '<leader>e', function() Snacks.explorer() end, { desc = 'Find Files' })
-
