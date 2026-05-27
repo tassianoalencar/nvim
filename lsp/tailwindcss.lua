@@ -36,6 +36,8 @@ return {
     "javascriptreact",
     "typescript",
     "typescriptreact",
+    "phtml",
+    "php"
   },
   root_markers = {
     "tailwind.config.js",

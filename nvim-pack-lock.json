@@ -1,65 +1,32 @@
 {
   "plugins": {
-    "git-conflict.nvim": {
-      "rev": "a1badcd",
-      "src": "https://github.com/akinsho/git-conflict.nvim"
+    "mini.hipatterns": {
+      "rev": "e25cf080aae092a651a92fa5e477f64a61adbebf",
+      "src": "https://github.com/echasnovski/mini.hipatterns"
     },
-    "mini.nvim": {
-      "rev": "c163117900c17d4abf30bc09452a261c8536060c",
-      "src": "https://github.com/nvim-mini/mini.nvim"
-    },
-    "nui.nvim": {
-      "rev": "de74099",
-      "src": "https://github.com/MunifTanjim/nui.nvim"
-    },
-    "nvim-autopairs": {
-      "rev": "c2a0dd0d931d0fb07665e1fedb1ea688da3b80b4",
-      "src": "https://github.com/windwp/nvim-autopairs"
-    },
-    "nvim-treesitter": {
-      "rev": "42fc28ba",
-      "src": "https://github.com/nvim-treesitter/nvim-treesitter",
-      "version": "'main'"
-    },
-    "nvim-treesitter-textobjects": {
-      "rev": "5ca4aaa",
-      "src": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects"
-    },
-    "nvim-ts-context-commentstring": {
-      "rev": "1b212c2",
-      "src": "https://github.com/JoosepAlviste/nvim-ts-context-commentstring"
-    },
-    "nvim-various-textobjs": {
-      "rev": "71bd98e08e96a730a60566f929a6ac3974ede0e0",
-      "src": "https://github.com/chrisgrieser/nvim-various-textobjs"
-    },
-    "nvim-web-devicons": {
-      "rev": "803353450c374192393f5387b6a0176d0972b848",
-      "src": "https://github.com/nvim-tree/nvim-web-devicons"
+    "nvim-tree.lua": {
+      "rev": "509962f21ab7289d8dcd28568af539be39a8c01e",
+      "src": "https://github.com/nvim-tree/nvim-tree.lua"
     },
     "plenary.nvim": {
-      "rev": "b9fd522",
+      "rev": "74b06c6c75e4eeb3108ec01852001636d85a932b",
       "src": "https://github.com/nvim-lua/plenary.nvim"
     },
-    "snacks.nvim": {
-      "rev": "fe7cfe9800a182274d0f868a74b7263b8c0c020b",
-      "src": "https://github.com/folke/snacks.nvim"
+    "telescope-fzf-native.nvim": {
+      "rev": "6fea601bd2b694c6f2ae08a6c6fab14930c60e2c",
+      "src": "https://github.com/nvim-telescope/telescope-fzf-native.nvim"
+    },
+    "telescope.nvim": {
+      "rev": "f04ab730b8f9c6bf3f54a206d0dcddfd70c52d59",
+      "src": "https://github.com/nvim-telescope/telescope.nvim"
     },
     "tokyodark.nvim": {
       "rev": "659aff3c73dc2e0159314050a81671f0b2eaad01",
       "src": "https://github.com/tiagovla/tokyodark.nvim"
     },
-    "tokyonight.nvim": {
-      "rev": "5da1b76e64daf4c5d410f06bcb6b9cb640da7dfd",
-      "src": "https://github.com/folke/tokyonight.nvim"
-    },
-    "vim-fugitive": {
-      "rev": "61b51c0",
-      "src": "https://github.com/tpope/vim-fugitive"
-    },
-    "which-key.nvim": {
-      "rev": "3aab214",
-      "src": "https://github.com/folke/which-key.nvim"
+    "tree-sitter-manager.nvim": {
+      "rev": "1085058c03df1d063f285e0a5c42547ad200a10b",
+      "src": "https://github.com/romus204/tree-sitter-manager.nvim"
     }
   }
 }
