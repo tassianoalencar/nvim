@@ -1,3 +1,5 @@
+vim.loader.enable(true)
+
 vim.pack.add({
   { src = "https://github.com/nvim-lua/plenary.nvim" },
   { src = "https://github.com/tiagovla/tokyodark.nvim" },
@@ -8,23 +10,16 @@ vim.pack.add({
   { src = "https://github.com/echasnovski/mini.hipatterns" }
 })
 
+local bufnr = nil
 local autocmd = vim.api.nvim_create_autocmd
 local keymap = vim.keymap.set
 local telescope = require('telescope')
 local telescope_builtin = require('telescope.builtin')
 local hipatterns = require('mini.hipatterns')
 
-autocmd('User', {
-  pattern = 'PackChanged',
-  callback = function(ev)
-    if ev.data.name == 'telescope-fzf-native.nvim' then
-      vim.system({ 'make' }, { cwd = ev.data.path }):wait()
-      print('Build complete for ' .. ev.data.name)
-    end
-  end,
-})
-
 vim.g.mapleader = " "
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.signcolumn = 'yes'
@@ -39,13 +34,35 @@ vim.opt.softtabstop = 2
 vim.opt.tabstop = 2
 vim.opt.completeopt = { 'fuzzy', 'menu', 'menuone', 'noinsert', 'popup' }
 vim.opt.termguicolors = true
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
-vim.cmd.colorscheme('tokyodark')
+vim.opt.updatetime = 300
+vim.lsp.inlay_hint.enable(true)
+
 
 vim.schedule(function()
   vim.o.clipboard = 'unnamedplus'
 end)
+
+vim.api.nvim_create_autocmd("CursorHold", {
+  buffer = bufnr,
+  callback = function()
+    local opts = {
+      focusable = false,
+      close_events = { "CursorMoved", "CursorMovedI", "BufLeave" },
+      focus = false,
+    }
+    vim.diagnostic.open_float(nil, opts)
+  end
+})
+
+autocmd('User', {
+  pattern = 'PackChanged',
+  callback = function(ev)
+    if ev.data.name == 'telescope-fzf-native.nvim' then
+      vim.system({ 'make' }, { cwd = ev.data.path }):wait()
+      print('Build complete for ' .. ev.data.name)
+    end
+  end,
+})
 
 autocmd('BufReadPost', {
   pattern = "*",
@@ -71,13 +88,15 @@ vim.lsp.enable({
   "lua_ls",
   "intelephense",
   "vtsls",
-  "tailwindcss"
+  "tailwindcss",
+  "pyright",
+  "ruff"
 })
 
 autocmd('LspAttach', {
   callback = function(ev)
     local client = vim.lsp.get_client_by_id(ev.data.client_id)
-    local bufnr = ev.buf
+    bufnr = ev.buf
 
     if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_completion) then
       local typed = ""
@@ -106,18 +125,32 @@ autocmd('LspAttach', {
         end,
       })
 
-      vim.api.nvim_create_autocmd("InsertLeave", {
+      autocmd("InsertLeave", {
         buffer = bufnr,
         callback = function() typed = "" end,
       })
     end
 
-    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { buffer = bufnr, desc = 'Go to definition' })
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = bufnr, desc = 'Hover', silent = true })
-    vim.keymap.set('n', '<leader>cf', vim.lsp.buf.format, { buffer = bufnr, desc = 'Code Format' })
-    vim.keymap.set('i', '<C-Space>', vim.lsp.completion.get)
-    vim.keymap.set('n', '<leader>cr', vim.lsp.buf.rename)
+    keymap('n', 'gd', vim.lsp.buf.definition, { buffer = bufnr, desc = 'Go to definition' })
+    keymap('n', 'K', vim.lsp.buf.hover, { buffer = bufnr, desc = 'Hover', silent = true })
+    keymap('n', '<leader>cf', vim.lsp.buf.format, { buffer = bufnr, desc = 'Code Format' })
+    keymap('i', '<C-Space>', vim.lsp.completion.get)
+    keymap('n', '<leader>cr', vim.lsp.buf.rename)
   end,
+})
+
+vim.diagnostic.config({
+  virtual_text = false, -- Disable inline "virtual" text
+  signs = true,
+  underline = true,
+  update_in_insert = false,
+  severity_sort = true,
+  float = {
+    border = 'rounded', -- 'single', 'double', 'shadow', or 'rounded'
+    source = 'always',  -- Show the source of the diagnostic (e.g., lua_ls, pyright)
+    header = '',
+    prefix = '',
+  },
 })
 
 require('tokyodark').setup({
@@ -158,3 +191,6 @@ keymap('n', '<leader>fg', telescope_builtin.live_grep, { desc = 'Telescope live 
 keymap('n', '<leader>fb', telescope_builtin.buffers, { desc = 'Telescope buffers' })
 keymap('n', '<leader>fh', telescope_builtin.help_tags, { desc = 'Telescope help tags' })
 keymap('n', '<leader>e', ':NvimTreeToggle<cr>')
+keymap('n', '<leader>ca', vim.lsp.buf.code_action, { desc = "LSP Code Actions" })
+
+vim.cmd.colorscheme('tokyodark')
