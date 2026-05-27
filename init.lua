@@ -8,13 +8,17 @@ vim.pack.add({
   { src = "https://github.com/echasnovski/mini.hipatterns" }
 })
 
--- Builds Pack
-vim.api.nvim_create_autocmd('User', {
+local autocmd = vim.api.nvim_create_autocmd
+local keymap = vim.keymap.set
+local telescope = require('telescope')
+local telescope_builtin = require('telescope.builtin')
+local hipatterns = require('mini.hipatterns')
+
+autocmd('User', {
   pattern = 'PackChanged',
   callback = function(ev)
-    -- Check if the updated plugin requires a build step
     if ev.data.name == 'telescope-fzf-native.nvim' then
-      vim.system({'make'}, { cwd = ev.data.path }):wait()
+      vim.system({ 'make' }, { cwd = ev.data.path }):wait()
       print('Build complete for ' .. ev.data.name)
     end
   end,
@@ -35,28 +39,27 @@ vim.opt.softtabstop = 2
 vim.opt.tabstop = 2
 vim.opt.completeopt = { 'fuzzy', 'menu', 'menuone', 'noinsert', 'popup' }
 vim.opt.termguicolors = true
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+vim.cmd.colorscheme('tokyodark')
 
 vim.schedule(function()
   vim.o.clipboard = 'unnamedplus'
 end)
 
-vim.api.nvim_create_autocmd('BufReadPost', {
+autocmd('BufReadPost', {
   pattern = "*",
   callback = function()
-    -- 1. Ignora buffers especiais, buffers sem nome ou previews do Telescope
-    if vim.bo.buftype ~= "" or vim.api.nvim_buf_get_name(0) == "" then 
-      return 
+    if vim.bo.buftype ~= "" or vim.api.nvim_buf_get_name(0) == "" then
+      return
     end
 
-    -- 2. Só ativa se for um arquivo real e legível no disco (ignora buffers virtuais de preview)
     if vim.fn.filereadable(vim.api.nvim_buf_get_name(0)) == 0 then
       return
     end
 
-    -- 3. Pega a linguagem de forma segura
     local lang = vim.treesitter.language.get_lang(vim.bo.filetype) or vim.bo.filetype
 
-    -- 4. Executa o Tree-sitter de forma totalmente protegida
     local has_parser, _ = pcall(vim.treesitter.get_parser, 0, lang)
     if has_parser then
       pcall(vim.treesitter.start)
@@ -71,7 +74,7 @@ vim.lsp.enable({
   "tailwindcss"
 })
 
-vim.api.nvim_create_autocmd('LspAttach', {
+autocmd('LspAttach', {
   callback = function(ev)
     local client = vim.lsp.get_client_by_id(ev.data.client_id)
     local bufnr = ev.buf
@@ -127,9 +130,6 @@ require('tokyodark').setup({
   },
 })
 
-vim.cmd.colorscheme('tokyodark')
-
-local hipatterns = require('mini.hipatterns')
 hipatterns.setup({
   highlighters = {
     hex_color = hipatterns.gen_highlighter.hex_color(),
@@ -140,17 +140,7 @@ require("tree-sitter-manager").setup({
   ensure_installed = { "lua", "php", "html", "javascript", "css" },
 })
 
--- NvimTree
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
 require("nvim-tree").setup()
-
-vim.keymap.set('n', '<leader>e', ':NvimTreeToggle<cr>')
-
-
--- Telescope
-local telescope = require('telescope')
-local builtin = require('telescope.builtin')
 
 telescope.setup {
   defaults = {
@@ -163,7 +153,8 @@ telescope.setup {
   }
 }
 
-vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
-vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
-vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
-vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
+keymap('n', '<leader>ff', telescope_builtin.find_files, { desc = 'Telescope find files' })
+keymap('n', '<leader>fg', telescope_builtin.live_grep, { desc = 'Telescope live grep' })
+keymap('n', '<leader>fb', telescope_builtin.buffers, { desc = 'Telescope buffers' })
+keymap('n', '<leader>fh', telescope_builtin.help_tags, { desc = 'Telescope help tags' })
+keymap('n', '<leader>e', ':NvimTreeToggle<cr>')
