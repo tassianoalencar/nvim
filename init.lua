@@ -1,21 +1,23 @@
-vim.loader.enable(true)
-
+-- ==========================================================================
+-- Packages
+-- ==========================================================================
 vim.pack.add({
   { src = "https://github.com/nvim-lua/plenary.nvim" },
   { src = "https://github.com/tiagovla/tokyodark.nvim" },
-  { src = "https://github.com/romus204/tree-sitter-manager.nvim" },
   { src = "https://github.com/nvim-tree/nvim-tree.lua" },
   { src = "https://github.com/nvim-telescope/telescope.nvim" },
   { src = "https://github.com/nvim-telescope/telescope-fzf-native.nvim" },
-  { src = "https://github.com/echasnovski/mini.hipatterns" }
+  { src = "https://github.com/echasnovski/mini.hipatterns" },
+  { src = "https://github.com/arborist-ts/arborist.nvim" },
 })
 
-local bufnr = nil
 local autocmd = vim.api.nvim_create_autocmd
 local keymap = vim.keymap.set
+local bufnr = nil
 local telescope = require('telescope')
 local telescope_builtin = require('telescope.builtin')
 local hipatterns = require('mini.hipatterns')
+local servers = { "lua_ls", "intelephense", "vtsls", "tailwindcss", "pyright", "ruff" }
 
 vim.g.mapleader = " "
 vim.g.loaded_netrw = 1
@@ -24,35 +26,26 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.signcolumn = 'yes'
 vim.opt.cursorline = true
+vim.opt.autoindent = true
 vim.opt.smartindent = true
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.opt.foldlevel = 99
 vim.opt.expandtab = true
-vim.opt.shiftwidth = 2
-vim.opt.softtabstop = 2
-vim.opt.tabstop = 2
+vim.opt.shiftwidth = 4
+vim.opt.softtabstop = 4
+vim.opt.tabstop = 4
 vim.opt.completeopt = { 'fuzzy', 'menu', 'menuone', 'noinsert', 'popup' }
 vim.opt.termguicolors = true
 vim.opt.updatetime = 300
+vim.o.clipboard = 'unnamedplus'
+vim.opt.cmdheight = 0
+vim.o.winborder = "double"
+vim.opt.wrap = false
+vim.opt.splitbelow = true
+vim.opt.splitright = true
 vim.lsp.inlay_hint.enable(true)
-
-
-vim.schedule(function()
-  vim.o.clipboard = 'unnamedplus'
-end)
-
-vim.api.nvim_create_autocmd("CursorHold", {
-  buffer = bufnr,
-  callback = function()
-    local opts = {
-      focusable = false,
-      close_events = { "CursorMoved", "CursorMovedI", "BufLeave" },
-      focus = false,
-    }
-    vim.diagnostic.open_float(nil, opts)
-  end
-})
+vim.lsp.enable(servers)
 
 autocmd('User', {
   pattern = 'PackChanged',
@@ -82,15 +75,6 @@ autocmd('BufReadPost', {
       pcall(vim.treesitter.start)
     end
   end
-})
-
-vim.lsp.enable({
-  "lua_ls",
-  "intelephense",
-  "vtsls",
-  "tailwindcss",
-  "pyright",
-  "ruff"
 })
 
 autocmd('LspAttach', {
@@ -139,45 +123,37 @@ autocmd('LspAttach', {
   end,
 })
 
-vim.diagnostic.config({
-  virtual_text = false, -- Disable inline "virtual" text
-  signs = true,
-  underline = true,
-  update_in_insert = false,
-  severity_sort = true,
-  float = {
-    border = 'rounded', -- 'single', 'double', 'shadow', or 'rounded'
-    source = 'always',  -- Show the source of the diagnostic (e.g., lua_ls, pyright)
-    header = '',
-    prefix = '',
-  },
+autocmd("CursorHold", {
+  buffer = bufnr,
+  callback = function()
+    local opts = {
+      focusable = false,
+      close_events = { "CursorMoved", "CursorMovedI", "BufLeave" },
+      focus = false,
+    }
+    vim.diagnostic.open_float(nil, opts)
+  end
 })
-
-require('tokyodark').setup({
-  styles = {
-    comments = { italic = false },
-    keywords = { italic = false },
-    identifiers = { italic = false },
-    functions = { italic = false },
-    variables = { italic = false },
-  },
-})
-
-hipatterns.setup({
-  highlighters = {
-    hex_color = hipatterns.gen_highlighter.hex_color(),
-  },
-})
-
-require("tree-sitter-manager").setup({
-  ensure_installed = { "lua", "php", "html", "javascript", "css" },
-})
-
-require("nvim-tree").setup()
 
 telescope.setup {
   defaults = {
-    borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
+    vimgrep_arguments = {
+      "rg",
+      "--color=never",
+      "--no-heading",
+      "--with-filename",
+      "--line-number",
+      "--column",
+      "--smart-case",
+      "--hidden",
+      "--glob",
+      "!**/.git/*",
+    },
+    pickers = {
+      find_files = {
+        find_command = { "rg", "--files", "--hidden", "--smart-case" },
+      },
+    },
     path_display = {
       filename_first = {
         reverse_directories = false,
@@ -186,11 +162,106 @@ telescope.setup {
   }
 }
 
+require("nvim-tree").setup()
+require("arborist").setup()
+
+-- Keymaps
 keymap('n', '<leader>ff', telescope_builtin.find_files, { desc = 'Telescope find files' })
 keymap('n', '<leader>fg', telescope_builtin.live_grep, { desc = 'Telescope live grep' })
 keymap('n', '<leader>fb', telescope_builtin.buffers, { desc = 'Telescope buffers' })
 keymap('n', '<leader>fh', telescope_builtin.help_tags, { desc = 'Telescope help tags' })
 keymap('n', '<leader>e', ':NvimTreeToggle<cr>')
 keymap('n', '<leader>ca', vim.lsp.buf.code_action, { desc = "LSP Code Actions" })
+keymap('n', '<leader>sr', ':source %<cr>', { desc = 'Reload buffer code' })
+keymap('n', '<leader>si', ':Inspect<cr>', { desc = 'Reload buffer code' })
+keymap('n', '<leader>bd', ':bdelete<cr>', { desc = 'Reload buffer code' })
+keymap('n', '<Esc>', '<cmd>nohlsearch<CR>')
+vim.keymap.set('v', '<leader>n', [[:s/^/\=line('.') - line("'<") + 1 . '. '<CR>]], { silent = true })
 
-vim.cmd.colorscheme('tokyodark')
+-- Themes
+local themes = {}
+
+local palettes = {
+  maguh = {
+    background = "#1B1B1B",
+
+    gray = {
+      darkest  = "#0D0D0D",
+      darker   = "#121212",
+      dark     = "#1B1B1B",
+      medium   = "#252525",
+      light    = "#303030",
+      lighter  = "#404040",
+      soft     = "#525252",
+      muted    = "#737373",
+      text_dim = "#A3A3A3",
+      text     = "#EAEAEA",
+    },
+
+    accent = {
+      blue = {
+        base  = "#3B82F6",
+        hover = "#60A5FA",
+      },
+
+      green = {
+        base  = "#22C55E",
+        hover = "#4ADE80",
+      },
+
+      orange = {
+        base  = "#F97316",
+        hover = "#FB923C",
+      }
+    }
+  }
+}
+
+themes.highlights = {
+
+  -- Padrão do Editor (UI)
+  Normal      = { fg = palettes.maguh.gray.text, bg = palettes.maguh.background },
+  Comment     = { fg = palettes.maguh.gray.light },
+  CursorLine  = { bg = palettes.maguh.gray.medium },
+  Visual      = { bg = palettes.maguh.gray.medium },
+
+  FloatBorder = { bg = palettes.maguh.background },
+  NormalFloat = { bg = palettes.maguh.gray.dark },
+
+  Pmenu       = { bg = palettes.maguh.gray.medium },
+  PmenuSel    = { bg = palettes.maguh.gray.light },
+
+  -- Sintaxe Básica (Cores Principais)
+  Keyword     = { fg = palettes.maguh.accent.green.base },
+  Function    = { fg = palettes.maguh.accent.blue.base },
+  Type        = { fg = palettes.maguh.accent.orange.base },
+  -- String            = { fg = theme.palette.string },
+  -- Type              = { fg = theme.palette.class },
+  -- PreProc           = { fg = theme.palette.keyword, bold = true },
+  -- Statement         = { fg = theme.palette.keyword, bold = true },
+
+  -- Suporte Completo ao Neovim Treesitter (@tags)
+  ["@type.builtin"] = { fg = palettes.maguh.accent.orange.base },
+  -- ["@function.method"] = { fg = theme.palette.func },
+  -- ["@constructor"] = { fg = theme.palette.func },
+  -- ["@variable.builtin"] = { fg = theme.palette.class },
+}
+
+vim.cmd("highlight clear")
+
+if vim.fn.exists("syntax_on") == 1 then
+  vim.cmd("syntax reset")
+end
+
+vim.g.colors_name = "maguh_theme"
+
+for group, opts in pairs(themes.highlights) do
+  vim.api.nvim_set_hl(0, group, opts)
+end
+
+hipatterns.setup({
+  highlighters = {
+    hex_color = hipatterns.gen_highlighter.hex_color(),
+  },
+})
+

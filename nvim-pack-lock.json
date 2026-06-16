@@ -1,5 +1,9 @@
 {
   "plugins": {
+    "arborist.nvim": {
+      "rev": "fdeef56c2840c6772b9f68c5774ed87e9340ec7d",
+      "src": "https://github.com/arborist-ts/arborist.nvim"
+    },
     "mini.hipatterns": {
       "rev": "e25cf080aae092a651a92fa5e477f64a61adbebf",
       "src": "https://github.com/echasnovski/mini.hipatterns"
