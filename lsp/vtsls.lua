@@ -1,7 +1,7 @@
 return {
   cmd = { 'vtsls', '--stdio' },
-  root_markers = { 'package.json' },
-  filetypes = { 'javascript', 'typescript', 'typescriptreact' },
+  root_markers = { 'tsconfig.json', 'jsconfig.json', 'package.json', '.git' },
+  filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
   settings = {
     typescript = {
       updateImportsOnFileMove = { enabled = 'always' },

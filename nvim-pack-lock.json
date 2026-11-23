@@ -4,6 +4,10 @@
       "rev": "fdeef56c2840c6772b9f68c5774ed87e9340ec7d",
       "src": "https://github.com/arborist-ts/arborist.nvim"
     },
+    "mason.nvim": {
+      "rev": "2a6940af80375532e5e9e7c1f2fc6319a1b7a69d",
+      "src": "https://github.com/mason-org/mason.nvim"
+    },
     "mini.hipatterns": {
       "rev": "e25cf080aae092a651a92fa5e477f64a61adbebf",
       "src": "https://github.com/echasnovski/mini.hipatterns"
@@ -31,10 +35,6 @@
     "telescope.nvim": {
       "rev": "f04ab730b8f9c6bf3f54a206d0dcddfd70c52d59",
       "src": "https://github.com/nvim-telescope/telescope.nvim"
-    },
-    "tokyodark.nvim": {
-      "rev": "659aff3c73dc2e0159314050a81671f0b2eaad01",
-      "src": "https://github.com/tiagovla/tokyodark.nvim"
     },
     "tree-sitter-manager.nvim": {
       "rev": "1085058c03df1d063f285e0a5c42547ad200a10b",

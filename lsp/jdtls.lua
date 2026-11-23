@@ -1,41 +1,34 @@
-local home = vim.env.HOME
-local jdtls_path = home .. "/.local/share/jdtls"
-local launcher = vim.fn.glob(jdtls_path .. "/plugins/org.eclipse.equinox.launcher_*.jar")
-local workspace = jdtls_path .. "/workspaces/" .. vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
-
+-- Instalado pelo Mason (pacote `jdtls`). Requer Java 21+ no PATH.
+-- Um workspace por projeto, guardado no cache do nvim.
+---@type vim.lsp.Config
 return {
-  name = "jdtls",
-  cmd = {
-    "java",
-    "-Declipse.application=org.eclipse.jdt.ls.core.id1",
-    "-Dosgi.bundles.defaultStartLevel=4",
-    "-Declipse.product=org.eclipse.jdt.ls.core.product",
-    "-Dlog.protocol=true",
-    "-Dlog.level=ALL",
-    "-Xms1g",
-    "-Xmx2G",
-    "-jar", launcher,
-    "-configuration", jdtls_path .. "/config_linux",
-    "-data", workspace,
-  },
+  cmd = function(dispatchers, config)
+    local project = vim.fn.fnamemodify(config.root_dir or vim.fn.getcwd(), ':p:h:t')
+    local workspace = vim.fn.stdpath('cache') .. '/jdtls/workspaces/' .. project
+
+    return vim.lsp.rpc.start({
+      'jdtls',
+      '-data', workspace,
+      '--jvm-arg=-Xms1g',
+      '--jvm-arg=-Xmx2G',
+    }, dispatchers, { cwd = config.root_dir })
+  end,
+  filetypes = { 'java' },
   root_markers = {
     'settings.gradle',
     'settings.gradle.kts',
     'pom.xml',
     'build.gradle',
+    'build.gradle.kts',
     'mvnw',
     'gradlew',
-    'build.gradle',
-    'build.gradle.kts',
     '.git',
   },
-  filetypes = { "java" },
   settings = {
     java = {
       signatureHelp = { enabled = true },
-      contentProvider = { preferred = "fernflower" },
+      contentProvider = { preferred = 'fernflower' },
       completion = { maxResults = 20 },
     },
   },
-  -- capabilities = vim.lsp.protocol.make_client_capabilities(),
 }

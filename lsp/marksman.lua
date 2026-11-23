@@ -1,6 +1,6 @@
 return {
   cmd = { 'marksman' },
   filetypes = {
-    'md'
+    'markdown'
   }
 }

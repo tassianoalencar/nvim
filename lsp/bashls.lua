@@ -7,5 +7,4 @@ return {
     },
   },
   filetypes = { "bash", "sh" },
-  single_file_support = true,
 }
