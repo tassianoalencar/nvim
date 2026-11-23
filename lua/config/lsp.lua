@@ -41,6 +41,46 @@ local function setup_completion(client, buf)
   })
 end
 
+--- Range (formato de vim.lsp.buf.code_action) cobrindo a linha do cursor,
+--- ou nil se a linha não tiver diagnósticos. Por padrão o Neovim só envia ao
+--- servidor os diagnósticos que estão exatamente sob o cursor; usando a linha
+--- inteira, os quick fixes aparecem com o cursor em qualquer ponto dela.
+local function line_diagnostic_range()
+  local row = vim.api.nvim_win_get_cursor(0)[1]
+  if #vim.diagnostic.get(0, { lnum = row - 1 }) == 0 then
+    return nil
+  end
+  local len = #vim.api.nvim_get_current_line()
+  return { start = { row, 0 }, ['end'] = { row, math.max(len - 1, 0) } }
+end
+
+--- Code actions; no modo normal inclui todos os diagnósticos da linha.
+local function code_action()
+  local mode = vim.api.nvim_get_mode().mode
+  if mode == 'v' or mode == 'V' then
+    return vim.lsp.buf.code_action()
+  end
+  vim.lsp.buf.code_action({ range = line_diagnostic_range() })
+end
+
+--- Quick fix: só ações que corrigem os diagnósticos da linha.
+--- Se houver apenas uma, aplica direto; se a linha não tiver problema,
+--- pula para o próximo diagnóstico primeiro.
+local function quickfix()
+  local range = line_diagnostic_range()
+  if not range then
+    if not vim.diagnostic.jump({ count = 1 }) then
+      return vim.notify('Nenhum diagnóstico no buffer', vim.log.levels.INFO)
+    end
+    range = line_diagnostic_range()
+  end
+  vim.lsp.buf.code_action({
+    range = range,
+    context = { only = { 'quickfix' } },
+    apply = true,
+  })
+end
+
 local function setup_keymaps(buf)
   local map = function(mode, lhs, rhs, desc)
     vim.keymap.set(mode, lhs, rhs, { buffer = buf, desc = desc })
@@ -49,7 +89,8 @@ local function setup_keymaps(buf)
   map('n', 'gd', vim.lsp.buf.definition, 'Go to definition')
   map('n', '<leader>cf', vim.lsp.buf.format, 'Code format')
   map('n', '<leader>cr', vim.lsp.buf.rename, 'Code rename')
-  map('n', '<leader>ca', vim.lsp.buf.code_action, 'Code actions')
+  map({ 'n', 'x' }, '<leader>ca', code_action, 'Code actions')
+  map('n', '<leader>cq', quickfix, 'Quick fix diagnostic')
   map('i', '<C-Space>', vim.lsp.completion.get, 'Trigger completion')
 end
 

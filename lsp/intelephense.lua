@@ -1,3 +1,6 @@
+-- Licença premium (code actions, rename, implementation...):
+-- o intelephense lê a chave de ~/intelephense/licence.txt automaticamente.
+-- Fica fora do repositório para não versionar a chave.
 return {
   cmd = {'intelephense', '--stdio' },
   filetypes = { 'php', 'phtml' },
