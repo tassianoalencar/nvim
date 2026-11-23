@@ -81,12 +81,32 @@ local function quickfix()
   })
 end
 
+--- Go to definition: remove locais duplicados (alguns servidores, como o
+--- intelephense, devolvem o mesmo local mais de uma vez). Com um único
+--- resultado pula direto; com vários abre o quickfix.
+local function goto_definition()
+  vim.lsp.buf.definition({
+    on_list = function(opts)
+      local seen, items = {}, {}
+      for _, item in ipairs(opts.items) do
+        local key = ('%s:%d:%d'):format(item.filename, item.lnum, item.col)
+        if not seen[key] then
+          seen[key] = true
+          table.insert(items, item)
+        end
+      end
+      vim.fn.setqflist({}, ' ', { title = opts.title, items = items })
+      vim.cmd(#items == 1 and 'cfirst' or 'botright copen')
+    end,
+  })
+end
+
 local function setup_keymaps(buf)
   local map = function(mode, lhs, rhs, desc)
     vim.keymap.set(mode, lhs, rhs, { buffer = buf, desc = desc })
   end
 
-  map('n', 'gd', vim.lsp.buf.definition, 'Go to definition')
+  map('n', 'gd', goto_definition, 'Go to definition')
   map('n', '<leader>cf', vim.lsp.buf.format, 'Code format')
   map('n', '<leader>cr', vim.lsp.buf.rename, 'Code rename')
   map({ 'n', 'x' }, '<leader>ca', code_action, 'Code actions')
